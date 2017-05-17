@@ -1,0 +1,21 @@
+{
+  "name": "ScavengerHunt",
+  "version": "1.0.0",
+  "description": "You can use the [editor on GitHub](https://github.com/agbarlow/ScavengerHunt/edit/master/README.md) to maintain and preview the content for your website in Markdown files.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agbarlow/ScavengerHunt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agbarlow/ScavengerHunt/issues"
+  },
+  "homepage": "https://github.com/agbarlow/ScavengerHunt#readme"
+}
