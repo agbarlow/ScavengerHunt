@@ -16,12 +16,65 @@ router.get('/', function(req, res) {
   });
 });
 
-/*Get route for questions page*/
-  router.get('/questions', function(req, res) {
-  models.Questions.findAll().then(function(data) {
+/*Breaking up each 'land' into it's own route
+we can change how this works later on if we want -SB*/
+  router.get('/Adventureland/', function(req, res) {
+  models.Questions.findAll({
+  where: {
+    land: 'Adventureland'
+  }
+}).then(function(data) {
     console.log(data);
     /*Render index.handlebars on root route*/
-    res.render("questions");
+    res.render("questions", {question:data});
+  });
+});
+
+  router.get('/Frontierland/', function(req, res) {
+  models.Questions.findAll({
+  where: {
+    land: 'Frontierland'
+  }
+}).then(function(data) {
+    console.log(data);
+    /*Render index.handlebars on root route*/
+    res.render("questions", {question:data});
+  });
+});
+
+  router.get('/LibertySquare/', function(req, res) {
+  models.Questions.findAll({
+  where: {
+    land: 'Liberty Square'
+  }
+}).then(function(data) {
+    console.log(data);
+    /*Render index.handlebars on root route*/
+    res.render("questions", {question:data});
+  });
+});
+
+  router.get('/Fantasyland/', function(req, res) {
+  models.Questions.findAll({
+  where: {
+    land: 'Fantasyland'
+  }
+}).then(function(data) {
+    console.log(data);
+    /*Render index.handlebars on root route*/
+    res.render("questions", {question:data});
+  });
+});
+
+  router.get('/Tomorrowland/', function(req, res) {
+  models.Questions.findAll({
+  where: {
+    land: 'Tomorrowland'
+  }
+}).then(function(data) {
+    console.log(data);
+    /*Render index.handlebars on root route*/
+    res.render("questions", {question:data});
   });
 });
 

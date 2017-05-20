@@ -1,8 +1,28 @@
-This is the questions page!
+<a href="/Adventureland">Adventureland</a> - 
+<a href="/Frontierland">Frontierland</a> - 
+<a href="/LibertySquare">Liberty Square</a> - 
+<a href="Fantasyland">Fantasyland</a> - 
+<a href="Tomorrowland">Tomorrowland</a>
+<br>
 
-Todo: 
 <ul>
-  <li>Load questions from DB</li>
-  <li>Add links for 'lands'</li>
-  <li>Probably need a handlebars 'partial' to show only the questions for the specific land</li>
+  {{#each question}}
+      <p>
+        {{this.id}}. {{this.question}}
+      </p>
+      <p>
+        A. {{this.answer1}}
+      </p>
+      <p>
+        B. {{this.answer2}}
+      </p>
+      <p>
+        C. {{this.answer3}}
+      </p>
+      <p>
+        D. {{this.answer4}}
+      </p>
+  {{/each}}
 </ul>
+
+<a href="/standings">View Standings</a>
