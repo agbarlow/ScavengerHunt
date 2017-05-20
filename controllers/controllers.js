@@ -10,10 +10,18 @@ var router = express.Router();
 // ===============================================================================
 router.get('/', function(req, res) {
   models.Questions.findAll().then(function(data) {
-
     console.log(data);
+    /*Render index.handlebars on root route*/
+    res.render("index");
+  });
+});
 
-
+/*Get route for questions page*/
+  router.get('/questions', function(req, res) {
+  models.Questions.findAll().then(function(data) {
+    console.log(data);
+    /*Render index.handlebars on root route*/
+    res.render("questions");
   });
 });
 
