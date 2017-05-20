@@ -42,6 +42,7 @@ router.get('/', function(req, res) {
     
     /*Render index.handlebars on root route*/
     res.render("standings");
+    });
   });
 });
 // To check if a usename is unique
