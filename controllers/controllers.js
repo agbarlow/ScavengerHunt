@@ -44,7 +44,6 @@ router.get('/', function(req, res) {
     res.render("standings");
     });
   });
-});
 // To check if a usename is unique
 models.Users.findAll({ where: {
   userName:'arumita'
