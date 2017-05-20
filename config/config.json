@@ -1,7 +1,11 @@
 {
   "development": {
     "username": "root",
+<<<<<<< HEAD
     "password": "Dolphy25",
+=======
+    "password": "root",
+>>>>>>> fd9887fac8b736b296025842ae90ffcf34ccaf89
     "database": "scavengerhunt",
     "host": "127.0.0.1",
     "dialect": "mysql"

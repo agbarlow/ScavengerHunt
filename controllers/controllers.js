@@ -10,10 +10,28 @@ var router = express.Router();
 // ===============================================================================
 router.get('/', function(req, res) {
   models.Questions.findAll().then(function(data) {
-
     console.log(data);
+    /*Render index.handlebars on root route*/
+    res.render("index");
+  });
+});
 
+/*Get route for questions page*/
+  router.get('/questions', function(req, res) {
+  models.Questions.findAll().then(function(data) {
+    console.log(data);
+    /*Render index.handlebars on root route*/
+    res.render("questions");
+  });
+});
 
+/*Get route for standings page*/
+  router.get('/standings', function(req, res) {
+  models.Users.findAll().then(function(data) {
+    console.log(data);
+    
+    /*Render index.handlebars on root route*/
+    res.render("standings");
   });
 });
 
