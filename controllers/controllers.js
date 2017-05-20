@@ -25,4 +25,14 @@ router.get('/', function(req, res) {
   });
 });
 
+/*Get route for standings page*/
+  router.get('/standings', function(req, res) {
+  models.Users.findAll().then(function(data) {
+    console.log(data);
+    
+    /*Render index.handlebars on root route*/
+    res.render("standings");
+  });
+});
+
 module.exports = router;
