@@ -8,13 +8,36 @@ var router = express.Router();
 // ===============================================================================
 // ROUTING
 // ===============================================================================
-router.get('/', function(req, res) {
-  models.Questions.findAll().then(function(data) {
 
-    console.log(data);
+ /*models.Users.findAll({
+  attributes: [
+    'teamName','DISTINCT'
+   // 'DISTINCT(teamName)'
+  ],
+ 
+})*/
+models.Users.aggregate('teamName', 'DISTINCT', { plain: false }).then(function(data) {
 
+   console.log(data);
 
   });
-});
+
+models.Users.findAll({ where: {
+  userName:'arumita'
+  }}).then(function(data) {
+
+   console.log(data);
+
+  });
+
+  models.Users.create({
+      userName: 'testUsername',
+      teamName: 'teamName'
+    }).then(function(data) {
+      // We have access to the new todo as an argument inside of the callback function
+     console.log(data);
+    });
+
+
 
 module.exports = router;
