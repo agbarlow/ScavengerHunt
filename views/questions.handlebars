@@ -2,27 +2,35 @@
 <a href="/Frontierland">Frontierland</a> - 
 <a href="/LibertySquare">Liberty Square</a> - 
 <a href="Fantasyland">Fantasyland</a> - 
-<a href="Tomorrowland">Tomorrowland</a>
-<br>
+<a href="Tomorrowland">Tomorrowland</a><br><br>
 
-<ul>
-  {{#each question}}
-      <p>
-        {{this.id}}. {{this.question}}
-      </p>
-      <p>
-        A. {{this.answer1}}
-      </p>
-      <p>
-        B. {{this.answer2}}
-      </p>
-      <p>
-        C. {{this.answer3}}
-      </p>
-      <p>
-        D. {{this.answer4}}
-      </p>
-  {{/each}}
+
+<!-- Create a list for each question in this specific 'land'
+load each question, the 4 answer options and a submit button.
+Each answer has a specific id, i.e. question 3 answer 4 would be
+id='question3answer4' -SB
+ -->
+ <ul>
+{{#each question}}
+<p>
+  {{this.id}}. {{this.question}}
+</p>
+<div class="radio" id="question{{this.id}}answer1">
+  <label><input type="radio" name="optradio">{{this.answer1}}</label>
+</div>
+<div class="radio" id="question{{this.id}}answer2">
+  <label><input type="radio" name="optradio">{{this.answer2}}</label>
+</div>
+<div class="radio" id="question{{this.id}}answer3">
+  <label><input type="radio" name="optradio">{{this.answer3}}</label>
+</div>
+<div class="radio" id="question{{this.id}}answer4">
+  <label><input type="radio" name="optradio">{{this.answer4}}</label>
+</div>
+<input type="submit" class="btn btn-success" value="Submit">
+<br>
+{{/each}}
 </ul>
+
 
 <a href="/standings">View Standings</a> 
