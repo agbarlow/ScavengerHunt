@@ -1,16 +1,8 @@
-// ==============================================================================
-// DEPENDENCIES
-// Series of npm packages that we will use to give our server useful functionality
-// ==============================================================================
-
+// Dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var methodOverride = require('method-override');
-// ==============================================================================
-// EXPRESS CONFIGURATION
-// This sets up the basic properties for our express server
-// ==============================================================================
 
 // Tells node that we are creating an "express" server
 var app = express();
@@ -27,7 +19,7 @@ app.set("view engine", "handlebars");
 app.use(express.static(process.cwd() + '/public'));
 
 
-//var mysql = require("mysql");
+var mysql = require("mysql");
 
 app.use(methodOverride('_method'));
 
@@ -39,21 +31,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-// ================================================================================
-// ROUTER
 // The below points our server to a series of "route" files.
-// These routes give our server a "map" of how to respond when users visit or request data from various URLs.
-// ================================================================================
-
-
 var routes=require("./controllers/controllers.js");
 app.use('/', routes);
 var db=require("./models")
-// ==============================================================================
-// LISTENER
-// The below code effectively "starts" our server
-// ==============================================================================
 
+// The below code effectively "starts" our server
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
