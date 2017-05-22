@@ -54,7 +54,21 @@ models.Users.aggregate('teamName', 'DISTINCT', {
 
 
 
-/*Get route for standings page*/
+/*Get route for registration page*/
+  router.get('/registration', function(req, res) {
+  models.Users.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
+    res.render("registration", {user:data});
+    console.log(data);
+  });
+});
+// To check if a usename is unique
+models.Users.findAll({ where: {
+  userName:'arumita'
+  }}).then(function(data) {
+  console.log(data);
+  )};
+
+ /*Get route for standings page*/
   router.get('/standings/', function(req, res) {
   models.Users.findAll({
   where: {
@@ -69,7 +83,6 @@ models.Users.aggregate('teamName', 'DISTINCT', {
     team
     });
     });
-
 
 router.get('/', function(req, res) {
   models.Questions.findAll().then(function(data) {
