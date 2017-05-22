@@ -6,87 +6,52 @@ var models= require("../models");
 var express = require('express');
 var router = express.Router();
 // ===============================================================================
-// ROUTING
+// URL ROUTING
 // ===============================================================================
 var team = "Clemson";
 
+//   ***The One Route to Route them all***
+// Route used to retrieve questions for any land
+router.get('/:land', function(req, res) {
+  models.Questions.findAll({
+  where: {
+    land: req.params.land
+    include: [{model: Questions}]
+  }
+}).then(function(data) {
+    console.log(data);
+    /*Render index.handlebars on root route*/
+    res.render("questions", {question:data});
+  });
+});
+
+
+
+// To check if a usename is unique 
+router.get('/:username', function(req, res) {
+  models.Users.findOne({ where: {
+    userName:req.params.username
+  }}).then(function(data) {
+
+    console.log(data);
+
+  });
+});
+//To create an entry for a new user and log to console
+models.Users.create({
+    userName: 'testUsername',
+    teamName: 'teamName'
+  }).then(function(data) {
+    console.log(data);
+  });
 
 //To select distinct team names
-models.Users.aggregate('teamName', 'DISTINCT', { plain: false }).then(function(data) {
-
+models.Users.aggregate('teamName', 'DISTINCT', {
+  plain: false 
+}).then(function(data) {
    console.log(data);
   });
 
-
-router.get('/', function(req, res) {
-  models.Questions.findAll().then(function(data) {
-    console.log(data);
-    /*Render index.handlebars on root route*/
-    res.render("index");
-  });
-});
-
-/*Breaking up each 'land' into it's own route
-we can change how this works later on if we want -SB*/
-  router.get('/Adventureland/', function(req, res) {
-  models.Questions.findAll({
-  where: {
-    land: 'Adventureland'
-  }
-}).then(function(data) {
-    console.log(data);
-    /*Render index.handlebars on root route*/
-    res.render("questions", {question:data});
-  });
-});
-
-  router.get('/Frontierland/', function(req, res) {
-  models.Questions.findAll({
-  where: {
-    land: 'Frontierland'
-  }
-}).then(function(data) {
-    console.log(data);
-    /*Render index.handlebars on root route*/
-    res.render("questions", {question:data});
-  });
-});
-
-  router.get('/LibertySquare/', function(req, res) {
-  models.Questions.findAll({
-  where: {
-    land: 'Liberty Square'
-  }
-}).then(function(data) {
-    console.log(data);
-    /*Render index.handlebars on root route*/
-    res.render("questions", {question:data});
-  });
-});
-
-  router.get('/Fantasyland/', function(req, res) {
-  models.Questions.findAll({
-  where: {
-    land: 'Fantasyland'
-  }
-}).then(function(data) {
-    console.log(data);
-    /*Render index.handlebars on root route*/
-    res.render("questions", {question:data});
-  });
-});
-
-  router.get('/Tomorrowland/', function(req, res) {
-  models.Questions.findAll({
-  where: {
-    land: 'Tomorrowland'
-  }
-}).then(function(data) {
-    console.log(data);
-    /*Render index.handlebars on root route*/
-    res.render("questions", {question:data});
-  });
-});
 
 
 /*Get route for standings page*/
@@ -104,23 +69,16 @@ we can change how this works later on if we want -SB*/
     team
     });
     });
-  });
-// To check if a usename is unique
-models.Users.findAll({ where: {
-  userName:'arumita'
-  }}).then(function(data) {
 
-   console.log(data);
+
+router.get('/', function(req, res) {
+  models.Questions.findAll().then(function(data) {
+    console.log(data);
+    res.render("index");
 
   });
-//To create an entry for a new user
-  models.Users.create({
-      userName: 'testUsername',
-      teamName: 'teamName'
-    }).then(function(data) {
-      // We have access to the new todo as an argument inside of the callback function
-     console.log(data);
-    });
+});
+
 
 
 
