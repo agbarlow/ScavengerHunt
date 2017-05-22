@@ -1,9 +1,10 @@
-<--! Simple Layout for pushing Data to Standings Page- AGB  -->
-
-<h1>Standings for {{teamName}}</h1>
+<!-- Simple Layout for pushing Data to Standings Page- AGB  -->
+<a href="">Return to Questions</a>
+ 
+<h1>Standings for {{team}}</h1>
 
 <ol>
-{{#each User}}
-  <li>{{{teamName}}} {{{scores}}} </li>
+{{#each userName}}
+  <li>{{{this.userName}}} - {{{this.score}}} </li>
 {{/each}}
 </ol>

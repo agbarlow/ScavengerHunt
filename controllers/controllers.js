@@ -8,18 +8,7 @@ var router = express.Router();
 // ===============================================================================
 // URL ROUTING
 // ===============================================================================
-
-
-/*Get route for standings page*/
-router.get('/standings', function(req, res) {
-  models.Users.findAll().then(function(data) {
-    console.log(data);
-    
-    /*Render index.handlebars on root route*/
-    res.render("standings");
-    });
-  });
-
+var team = "Clemson";
 
 //   ***The One Route to Route them all***
 // Route used to retrieve questions for any land
@@ -65,10 +54,28 @@ models.Users.aggregate('teamName', 'DISTINCT', {
 
 
 
+/*Get route for standings page*/
+  router.get('/standings/', function(req, res) {
+  models.Users.findAll({
+  where: {
+  	teamName: team
+  	}
+  	}).then(function(data) {
+    //console.log(data);
+    
+    /*Render index.handlebars on root route*/
+    res.render("standings", {
+    userName:data,
+    team
+    });
+    });
+
+
 router.get('/', function(req, res) {
   models.Questions.findAll().then(function(data) {
     console.log(data);
     res.render("index");
+
   });
 });
 
