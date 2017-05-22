@@ -90,13 +90,18 @@ we can change how this works later on if we want -SB*/
 
 /*Get route for standings page*/
   router.get('/standings', function(req, res) {
-  models.Users.findAll().then(function(data) {
-    console.log(data);
-    
-    /*Render index.handlebars on root route*/
+  models.Users.findAll().then(function(data) { 
     res.render("standings");
     });
   });
+
+/*Get route for registration page*/
+  router.get('/registration', function(req, res) {
+  models.Users.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
+    res.render("registration", {user:data});
+    console.log(data);
+  });
+});
 // To check if a usename is unique
 models.Users.findAll({ where: {
   userName:'arumita'
