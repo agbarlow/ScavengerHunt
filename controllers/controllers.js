@@ -8,6 +8,7 @@ var router = express.Router();
 // ===============================================================================
 // ROUTING
 // ===============================================================================
+var team = "Clemson";
 
 
 //To select distinct team names
@@ -89,12 +90,19 @@ we can change how this works later on if we want -SB*/
 
 
 /*Get route for standings page*/
-  router.get('/standings', function(req, res) {
-  models.Users.findAll().then(function(data) {
-    console.log(data);
+  router.get('/standings/', function(req, res) {
+  models.Users.findAll({
+  where: {
+  	teamName: team
+  	}
+  	}).then(function(data) {
+    //console.log(data);
     
     /*Render index.handlebars on root route*/
-    res.render("standings");
+    res.render("standings", {
+    userName:data,
+    team
+    });
     });
   });
 // To check if a usename is unique
