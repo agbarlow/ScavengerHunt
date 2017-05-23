@@ -8,6 +8,9 @@ var router = express.Router();
 // ===============================================================================
 // URL ROUTING
 // ===============================================================================
+
+
+// WILL NEED TO REMOVE OR CHANGE ONCE WE DECLARE TEAM NAME
 var team = "Clemson";
 
 //   ***The One Route to Route them all***
@@ -72,21 +75,38 @@ models.Users.findAll({
 });
 
 /*Get route for standings page*/
-router.get('/standings/', function(req, res) {
-    models.Users.findAll({
-        where: {
-            teamName: team
-        }
-    }).then(function(data) {
-        //console.log(data);
 
-        /*Render index.handlebars on root route*/
-        res.render("standings", {
-            userName: data,
-            team
-        });
+  router.get('/standings/', function(req, res) {
+  models.Users.findAll({
+  where: {
+  	teamName: team
+  	}
+  	}).then(function(data) {
+    //console.log(data);
+    
+    
+    // NEEDS TO BE UPDATED WITH TEAM NAME ONCE WE DECLARE IT
+    
+    /*Render index.handlebars on root route*/
+    res.render("standings", {
+    userName:data,
+    team
     });
-});
+    });
+  });
+// To check if a usename is unique
+models.Users.findAll({ where: {
+  userName:'arumita'
+  }}).then(function(data) {
+
+   console.log(data);
+
+  });
+//To create an entry for a new user
+  models.Users.create({
+      userName: 'testUsername',
+      teamName: 'teamName'
+
 
 router.get('/', function(req, res) {
     models.Questions.findAll().then(function(data) {
