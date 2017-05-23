@@ -27,7 +27,6 @@ router.get('/:land', function(req, res) {
   models.Questions.findAll({
   where: {
     land: req.params.land
-    include: [{model: Questions}]
   }
 }).then(function(data) {
     console.log(data);
