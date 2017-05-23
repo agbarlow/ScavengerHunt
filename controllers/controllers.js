@@ -8,6 +8,9 @@ var router = express.Router();
 // ===============================================================================
 // ROUTING
 // ===============================================================================
+
+
+// WILL NEED TO REMOVE OR CHANGE ONCE WE DECLARE TEAM NAME
 var team = "Clemson";
 
 
@@ -97,6 +100,9 @@ we can change how this works later on if we want -SB*/
   	}
   	}).then(function(data) {
     //console.log(data);
+    
+    
+    // NEEDS TO BE UPDATED WITH TEAM NAME ONCE WE DECLARE IT
     
     /*Render index.handlebars on root route*/
     res.render("standings", {
