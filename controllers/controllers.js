@@ -12,7 +12,7 @@ var team = "Clemson";
 
 //   ***The One Route to Route them all***
 // Route used to retrieve questions for any land
-router.get('/:land', function(req, res) {
+router.get('/land/:land', function(req, res) {
     models.Questions.findAll({
         where: {
             land: req.params.land
@@ -27,7 +27,7 @@ router.get('/:land', function(req, res) {
 
 
 // To check if a usename is unique 
-router.get('/:username', function(req, res) {
+router.get('/username/:username', function(req, res) {
     models.Users.findOne({
         where: {
             userName: req.params.username
