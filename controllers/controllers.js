@@ -66,7 +66,7 @@ models.Users.findAll({ where: {
   userName:'arumita'
   }}).then(function(data) {
   console.log(data);
-  )};
+  });
 
  /*Get route for standings page*/
   router.get('/standings/', function(req, res) {
