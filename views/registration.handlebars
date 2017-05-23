@@ -52,10 +52,11 @@
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
 							  <select class="form-control" id="sel1">
-							    <option>1</option>
-							    <option>2</option>
-							    <option>3</option>
-							    <option>4</option>
+							    
+							  {{#each team}}
+                              <option value="{{this.DISTINCT}}" >{{this.DISTINCT}}</option>
+                              {{/each}}
+                             
 							  </select>
 						</div>
 					</div>
