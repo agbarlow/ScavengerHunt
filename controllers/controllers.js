@@ -11,7 +11,7 @@ var router = express.Router();
 
 
 // WILL NEED TO REMOVE OR CHANGE ONCE WE DECLARE TEAM NAME
-var team = "Clemson";
+var team = "teamName";
 
 //   ***The One Route to Route them all***
 // Route used to retrieve questions for any land
