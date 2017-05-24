@@ -102,10 +102,6 @@ models.Users.findAll({ where: {
    console.log(data);
 
   });
-//To create an entry for a new user
-  models.Users.create({
-      userName: 'testUsername',
-      teamName: 'teamName'
 
 
 router.get('/', function(req, res) {
