@@ -42,14 +42,14 @@ router.get('/username/:username', function(req, res) {
     });
 });
 //To create an entry for a new user and log to console
-models.Users.create({
-    userName: 'testUsername',
-    teamName: 'teamName'
-}).then(function(data) {
-    console.log(data);
+router.get('/username/:username', function(req, res) {
+  models.Users.create({
+      userName: 'testUsername',
+      teamName: 'teamName'
+  }).then(function(data) {
+      console.log(data);
+  });
 });
-
-
 
 
 

@@ -36,6 +36,8 @@ var routes=require("./controllers/controllers.js");
 app.use('/', routes);
 var db=require("./models")
 
+require("./controllers/api-routes.js")(app);
+
 // The below code effectively "starts" our server
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
