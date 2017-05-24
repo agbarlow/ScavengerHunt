@@ -27,6 +27,10 @@ router.get('/land/:land', function(req, res) {
     });
 });
 
+router.post('/register', function(req, res) {
+    console.log(req.body);
+});
+
 
 
 // To check if a usename is unique 
@@ -56,6 +60,7 @@ models.Users.create({
 /*Get route for registration page*/
 router.get('/registration', function(req, res) {
     models.Users.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
+    	data.push({DISTINCT:'Add New Team'})
         res.render("registration", { team : data });
         console.log(data);
     });
