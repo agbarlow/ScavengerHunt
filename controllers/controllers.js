@@ -49,19 +49,14 @@ models.Users.create({
     console.log(data);
 });
 
-//To select distinct team names
-models.Users.aggregate('teamName', 'DISTINCT', {
-    plain: false
-}).then(function(data) {
-    console.log(data);
-});
+
 
 
 
 /*Get route for registration page*/
 router.get('/registration', function(req, res) {
     models.Users.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
-        res.render("registration", { user: data });
+        res.render("registration", { team : data });
         console.log(data);
     });
 });
@@ -102,7 +97,6 @@ models.Users.findAll({ where: {
    console.log(data);
 
   });
-
 
 router.get('/', function(req, res) {
     models.Questions.findAll().then(function(data) {
