@@ -1,8 +1,11 @@
 // Dependencies
 var express = require("express");
+var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var methodOverride = require('method-override');
+var expressValidator = require('express-validator');
+var expressSession = require('express-session');
 
 // Tells node that we are creating an "express" server
 var app = express();
@@ -18,6 +21,7 @@ app.set("view engine", "handlebars");
 
 app.use(express.static(process.cwd() + '/public'));
 
+app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
 
 var mysql = require("mysql");
 
@@ -30,11 +34,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
-
+//adding express validator and cookie parser
+app.use(expressValidator());
+app.use(cookieParser());
 // The below points our server to a series of "route" files.
 var routes=require("./controllers/controllers.js");
 app.use('/', routes);
+// catch 404 and forward to error handler
+
+
 var db=require("./models")
+
+
 
 // The below code effectively "starts" our server
 db.sequelize.sync().then(function() {

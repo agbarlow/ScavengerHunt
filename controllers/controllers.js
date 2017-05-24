@@ -27,9 +27,63 @@ router.get('/land/:land', function(req, res) {
     });
 });
 
-router.post('/register', function(req, res) {
+//post route to collect/validate/save registration info 
+
+router.post('/register', function(req, res, next) {
     console.log(req.body);
+
+  req.check('email', 'Invalid email address').isEmail();
+  req.check('password', 'Passwords dont match').equals(req.body.confirmPassword);
+  req.check('password', 'Password too short').isLength({min: 4});
+  req.check('username', 'Username cannot be empty').isLength({min: 1});
+  req.check('name', 'Name cannot be empty').isLength({min: 1});
+  var errors = req.validationErrors();
+  if (errors) {
+  	console.log(errors);
+  	//To populate teamname dropdown
+  	 models.Users.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
+  	 //find if username already exists
+  	 models.Users.findAll({ where: {
+     userName:req.body.username
+     }}).then(function(data2) {
+     //find if new team name already exists
+     models.Users.findAll({ where: {
+     teamName:req.body.newteam
+     }}).then(function(data3) {
+     	
+     	console.log("data3 is ",data3,data3.length)
+
+    if(data3.length>0)
+    {
+    errors.push({ param: 'teamname', msg: 'teamname already exists', value: '' });
+    console.log(errors);
+    }
+    if(data2.length>0)
+    {
+    errors.push({ param: 'username', msg: 'username already exists', value: '' });
+    console.log(errors);
+    }
+  });  
+  });
+
+    	data.push({DISTINCT:'Add New Team'})
+    	
+ 
+        res.render('registration', {
+      error: errors,
+       team : data 
+    });
+        
+    });
+  	
+    req.session.errors = errors;
+    req.session.success = false;
+  } else {
+    req.session.success = true;
+  }
+  
 });
+
 
 
 
@@ -95,13 +149,7 @@ models.Users.findAll({
     });
   });
 // To check if a usename is unique
-models.Users.findAll({ where: {
-  userName:'arumita'
-  }}).then(function(data) {
 
-   console.log(data);
-
-  });
 //To create an entry for a new user
   
 router.get('/', function(req, res) {
