@@ -1,0 +1,41 @@
+Database:
+1)	Review all columns and make sure we have everything we need
+2)	Confirm Scoring - COMPLETE
+3)	Confirm Booleans or how we are checking to see if how we know if they have answered the questions etc. - COMPLETE
+4)	Load Questions
+5)	Load Dummy Data
+
+Index Page: 
+1)	Validate input
+2)	Validate user is a actual user
+3)	Make sure Submit button works
+4)	Add instructions link - COMPLETE
+
+Instructions Page: 
+1)	Write verbiage - A.G.
+2)	Make Handlebars page - A.G.
+3)	Return to Registration - A.G.
+
+Registration Page
+1)	Push user info to database.  Create New Entry to table - Tyler
+2)	Validate input - Sean
+3)	Submit button working (and logic functioning) - Tyler
+
+Questions Page
+1)	Make sure questions push properly - COMPLETE
+2)	Set up question buttons to highlight or show user which one they chose when user presses the button
+3)	Submit button working
+4)	Logic to insure you can’t answer question twice
+5)	Modals to tell whether they have the answer right or wrong
+
+Standings Page
+1)	Logic to order the standings information to push accordingly. - A.G. - DONE
+2)  Include all Land Buttons and Link - Sean - DONE
+
+ALL PAGES
+1)	CSS – Clean up appearance - Sean / A.G.
+
+OTHER
+1) Modal when they have completed the game? Congratulations with the result?
+2) Comments out the Ying- Yang - EVERYONE
+3) Finish Page - A.G. ~ maybe
