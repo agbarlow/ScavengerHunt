@@ -1,15 +1,16 @@
 Database:
-1)	Review all columns and make sure we have everything we need
+1)	Review all columns and make sure we have everything we need - Semi-Complete - Tyler / Arumita
 2)	Confirm Scoring - COMPLETE
 3)	Confirm Booleans or how we are checking to see if how we know if they have answered the questions etc. - COMPLETE
-4)	Load Questions
-5)	Load Dummy Data
+4)	Load Questions - A.G.
+5)	Load Dummy Data - Arumita / A.G.
 
 Index Page: 
-1)	Validate input
-2)	Validate user is a actual user
-3)	Make sure Submit button works
+1)	Validate input - Arumita
+2)	Validate user is a actual user - Arumita
+3)	Make sure Submit button works - TBD
 4)	Add instructions link - COMPLETE
+5)  Session Stuff - Arumita
 
 Instructions Page: 
 1)	Write verbiage - A.G.
@@ -17,16 +18,16 @@ Instructions Page:
 3)	Return to Registration - A.G.
 
 Registration Page
-1)	Push user info to database.  Create New Entry to table - Tyler
-2)	Validate input - Sean
-3)	Submit button working (and logic functioning) - Tyler
+1)	Push user info to database.  Create New Entry to table - Tyler - COMPLETE
+2)	Validate input - Sean - Still be working on
+3)	Submit button working (and logic functioning) - Tyler - COMPLETE
 
 Questions Page
 1)	Make sure questions push properly - COMPLETE
-2)	Set up question buttons to highlight or show user which one they chose when user presses the button
-3)	Submit button working
-4)	Logic to insure you can’t answer question twice
-5)	Modals to tell whether they have the answer right or wrong
+2)	Set up question buttons to highlight or show user which one they chose when user presses the button - COMPLETE
+3)	Submit button working - TYLER
+4)	Logic to insure you can’t answer question twice - SEAN - Still changing the Div
+5)	No Modals 
 
 Standings Page
 1)	Logic to order the standings information to push accordingly. - A.G. - DONE
@@ -34,8 +35,9 @@ Standings Page
 
 ALL PAGES
 1)	CSS – Clean up appearance - Sean / A.G.
+2) Figure out the colors and fonts - A.G.
 
 OTHER
-1) Modal when they have completed the game? Congratulations with the result?
+1) Modal when they have completed the game? Congratulations with the result? - A.G.
 2) Comments out the Ying- Yang - EVERYONE
 3) Finish Page - A.G. ~ maybe
