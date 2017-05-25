@@ -141,3 +141,7 @@ span.input-group-addon i {
     font-size: 11px;
     text-align: center;
 }
+
+.error-list{
+    color:red;
+}

@@ -21,7 +21,7 @@ router.get('/land/:land', function(req, res) {
             land: req.params.land
         }
     }).then(function(data) {
-        console.log(data);
+        //console.log(data);
         /*Render index.handlebars on root route*/
         res.render("questions", { question: data });
     });
@@ -29,17 +29,26 @@ router.get('/land/:land', function(req, res) {
 
 //post route to collect/validate/save registration info 
 
-router.post('/register', function(req, res, next) {
+router.post('/registration', function(req, res, next) {
     console.log(req.body);
 
-  req.check('email', 'Invalid email address').isEmail();
-  req.check('password', 'Passwords dont match').equals(req.body.confirmPassword);
-  req.check('password', 'Password too short').isLength({min: 4});
-  req.check('username', 'Username cannot be empty').isLength({min: 1});
-  req.check('name', 'Name cannot be empty').isLength({min: 1});
+  req.check('email', 'Invalid email address format.').isEmail();
+  req.check('password', 'Passwords do not match.').equals(req.body.confirmPassword);
+  req.check('password', 'Password must be at least 6 characters.').isLength({min: 6});
+  req.check('username', 'Username is a required field.').isLength({min: 1});
+  req.check('name', 'Name is a required field.').isLength({min: 1});
   var errors = req.validationErrors();
   if (errors) {
   	console.log(errors);
+    /*inputData will store the users inputs in order to repopulate them
+     when there is an error* -SB */
+  var inputData = {
+    name : req.body.name,
+    email : req.body.email,
+    username : req.body.username,
+    password : req.body.password,
+    password_confirmation : req.body.password_confirmation,
+}
   	//To populate teamname dropdown
   	 models.Users.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
   	 //find if username already exists
@@ -51,17 +60,17 @@ router.post('/register', function(req, res, next) {
      teamName:req.body.newteam
      }}).then(function(data3) {
      	
-     	console.log("data3 is ",data3,data3.length)
+     	//console.log("data3 is ",data3,data3.length)
 
     if(data3.length>0)
     {
     errors.push({ param: 'teamname', msg: 'teamname already exists', value: '' });
-    console.log(errors);
+    //console.log(errors);
     }
     if(data2.length>0)
     {
     errors.push({ param: 'username', msg: 'username already exists', value: '' });
-    console.log(errors);
+    //console.log(errors);
     }
   });  
   });
@@ -71,7 +80,8 @@ router.post('/register', function(req, res, next) {
  
         res.render('registration', {
       error: errors,
-       team : data 
+       team : data,
+       inputData : inputData
     });
         
     });
@@ -95,7 +105,7 @@ router.get('/username/:username', function(req, res) {
         }
     }).then(function(data) {
 
-        console.log(data);
+       // console.log(data);
 
     });
 });
@@ -104,7 +114,7 @@ models.Users.create({
     userName: 'testUsername',
     teamName: 'teamName'
 }).then(function(data) {
-    console.log(data);
+    //console.log(data);
 });
 
 
@@ -116,7 +126,7 @@ router.get('/registration', function(req, res) {
     models.Users.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
     	data.push({DISTINCT:'Add New Team'})
         res.render("registration", { team : data });
-        console.log(data);
+      //  console.log(data);
     });
 });
 // To check if a usename is unique
@@ -125,7 +135,7 @@ models.Users.findAll({
         userName: 'arumita'
     }
 }).then(function(data) {
-    console.log(data);
+    //console.log(data);
 });
 
 /*Get route for standings page*/
@@ -153,7 +163,7 @@ models.Users.findAll({
   
 router.get('/', function(req, res) {
     models.Questions.findAll().then(function(data) {
-        console.log(data);
+        //console.log(data);
         res.render("index");
     });
 });

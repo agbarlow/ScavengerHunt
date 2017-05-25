@@ -1,14 +1,18 @@
 
 <div class="row main">
-    <div name = "error">{{error}}</div>
+    <ul class="error-list">
+  {{#each error}}
+    {{msg}}<br>
+  {{/each}}
+</ul>
 	<div class="main-login main-center">
-			<form class="" method="POST" action="/register">
+			<form class="" method="POST" action="/registration">
 				<div class="form-group">
 					<label for="name" class="cols-sm-2 control-label">Your Name</label>
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-							<input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name"/>
+							<input type="text" class="form-control" name="name" id="name"  placeholder="Enter your Name" value="{{inputData.name}}"/>
 						</div>
 					</div>
 				</div>
@@ -17,7 +21,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-							<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email"/>
+							<input type="text" class="form-control" name="email" id="email"  placeholder="Enter your Email" value="{{inputData.email}}"/>
 						</div>
 					</div>
 				</div>
@@ -26,7 +30,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-							<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+							<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username" value="{{inputData.username}}"/>
 						</div>
 					</div>
 				</div>
@@ -35,7 +39,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-							<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+							<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password" value="{{inputData.password}}"/>
 						</div>
 					</div>
 				</div>
@@ -44,7 +48,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-							<input type="password" class="form-control" name="confirmPassword" id="confirm"  placeholder="Confirm your Password"/>
+							<input type="password" class="form-control" name="confirmPassword" id="confirm"  placeholder="Confirm your Password" value="{{inputData.password}}"/>
 						</div>
 					</div>
 				</div>
@@ -77,8 +81,6 @@
 				<div class="form-group ">
 					<button type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
 				</div>
-
-
 			</form>
 	</div>
     
