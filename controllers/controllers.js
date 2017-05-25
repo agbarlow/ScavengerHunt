@@ -93,9 +93,34 @@ router.post('/registration', function(req, res, next) {
   }
   
 });
+// Login page validations with database
 
+router.post('/', function(req, res) {
+  	 models.Users.findAll({ where: {
+     userName:req.body.username
+     }}).then(function(data2) {
+     console.log(JSON.stringify(data2));
+     //find if username exists
+     var errors=[];
+     if(data2.length<1)
+    {
+    errors.push({ param: 'username', msg: 'username does not exist', value: '' });
+    res.render("index", { error: errors });
+    }
+    if(data2.length>0)
+    {
+    	if(JSON.parse(JSON.stringify(data2))[0].password==req.body.password)
+        res.redirect('/land/adventureland');
+      else
+        {
+          errors.push({ param: 'password', msg: 'password is incorrect', value: '' });
+          res.render("index", { error: errors });
 
+        }
+    }
 
+  });
+});
 
 // To check if a usename is unique 
 router.get('/username/:username', function(req, res) {

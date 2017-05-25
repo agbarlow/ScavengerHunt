@@ -6,6 +6,7 @@ var exphbs = require("express-handlebars");
 var methodOverride = require('method-override');
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
+var session = require('client-sessions');
 
 // Tells node that we are creating an "express" server
 var app = express();
@@ -36,6 +37,12 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 //adding express validator and cookie parser
 app.use(expressValidator());
+app.use(session({
+  cookieName: 'session',
+  secret: 'random_string_goes_here',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}));
 app.use(cookieParser());
 // The below points our server to a series of "route" files.
 var routes=require("./controllers/controllers.js");
