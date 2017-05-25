@@ -134,11 +134,10 @@ models.Users.findAll({
   models.Users.findAll({
   where: {
   	teamName: team
-  	}
+  	},
+  	order: "score DESC"
   	}).then(function(data) {
     //console.log(data);
-    
-    
     // NEEDS TO BE UPDATED WITH TEAM NAME ONCE WE DECLARE IT
     
     /*Render index.handlebars on root route*/
