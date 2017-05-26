@@ -1,10 +1,10 @@
 
 <div class="row main">
     <ul class="error-list">
-  {{#each error}}
-    {{msg}}<br>
-  {{/each}}
-</ul>
+	  {{#each error}}
+	    {{msg}}<br>
+	  {{/each}}
+	</ul>
 	<div class="main-login main-center">
 			<form class="" method="POST" action="/registration">
 				<div class="form-group">
@@ -53,28 +53,25 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="existing-team" class="cols-sm-2 control-label">Join an Existing Team</label>
+					<label for="existing-team" class="cols-sm-2 control-label">Join an Existing Team <b>- OR -</b> Create a New Team</label>
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
 							  <select class="form-control" name="team"  id="sel1">
-							    
+							  <option value="default">--Add New Team Below--</option>
 							  {{#each team}}
                               <option value="{{this.DISTINCT}}" >{{this.DISTINCT}}</option>
                               {{/each}}
-                             
 							  </select>
 						</div>
 					</div>
 				</div>
-				<b><span style="color:red">- OR -</span></b>
-				<br>
-				<div class="form-group">
+				<div class="form-group" id="new-team">
 					<label for="new-team" class="cols-sm-2 control-label">Create a New Team</label>
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-							<input type="text" onclick="myFunction()" class="form-control" name="newteam" id="newTeamName"  placeholder="Enter new Team Name"/>
+							<input type="text" class="form-control" name="newteam" id="newTeamName"  placeholder="Enter New Team Name"/>
 						</div>
 					</div>
 				</div>
@@ -83,20 +80,4 @@
 				</div>
 			</form>
 	</div>
-    
 </div>
-
-<script>
-/*function to disable newTeamName textbox if an existing team is selected*/
-  function   myFunction() {
-                var e = document.getElementById("sel1");
-                var strUser = e.options[e.selectedIndex].text;
-                if(strUser === "Add New Team"){
-                    document.getElementById("newTeamName").readOnly = false;
-                }
-                else{
-                    document.getElementById("newTeamName").value = document.getElementById("newTeamName").defaultValue;
-                    document.getElementById("newTeamName").readOnly = true;
-                }
-}
-    </script>

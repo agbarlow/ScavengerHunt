@@ -1,4 +1,8 @@
-<div name = "error">{{error}}</div>
+<ul class="error-list">
+  {{#each error}}
+    {{msg}}<br>
+  {{/each}}
+</ul>
 <form class="" method="POST" action="/">
 <div class="form-group form-group-lg .col-xs-4">
   <label for="usr">Username:</label>
