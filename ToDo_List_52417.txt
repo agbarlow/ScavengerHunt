@@ -19,7 +19,7 @@ Instructions Page:
 
 Registration Page
 1)	Push user info to database.  Create New Entry to table - Tyler - COMPLETE
-2)	Validate input - Sean - Still be working on
+2)	Validate input - Sean - COMPLETE (FINALLY!)
 3)	Submit button working (and logic functioning) - Tyler - COMPLETE
 
 Questions Page
