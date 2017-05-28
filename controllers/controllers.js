@@ -218,8 +218,14 @@ router.get('/', function(req, res) {
     });
 });
 //
-
-
+// Logout endpoint
+router.get('/logout', function(req, res){
+  // destroy session and logout(AD)
+  req.session.destroy(function(){
+    //redirect to login page(AD)
+    res.redirect('/');
+  });
+});
 /*restrict function ensures that only a person who has logged in can view this page(AD)*/
 function restrict(req, res, next) {
   if (req.session.user) {
