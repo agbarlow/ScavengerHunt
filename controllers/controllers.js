@@ -15,14 +15,20 @@ var team = "teamName";
 
 //   ***The One Route to Route them all***
 // Route used to retrieve questions for any land
-router.get('/land/:land', function(req, res) {
+/*restrict function ensures that only a person who has logged in can view this page(AD)*/
+/*to get details of current user use session variable req.session.user[0].userName to 
+query database and display appropriate questions(AD)*/
+router.get('/land/:land',restrict, function(req, res) {
     models.Questions.findAll({
         where: {
             land: req.params.land
         }
     }).then(function(data) {
         //console.log(data);
-        res.render("questions", { question: data });
+        res.render("questions", { 
+//username of logged in person will be displayed on top(AD)
+          user:req.session.user[0].userName,
+          question: data });
     });
 });
 
@@ -80,10 +86,10 @@ if (errors) {
   }); 
   });    	
  
-        res.render('registration', {
+      res.render('registration', {
       error: errors,
-       team : data,
-       inputData : inputData
+      team : data,
+      inputData : inputData
     });
         
     });
@@ -112,7 +118,21 @@ router.post('/', function(req, res) {
     if(data2.length>0)
     {
     	if(JSON.parse(JSON.stringify(data2))[0].password==req.body.password)
-        res.redirect('/land/mainst');
+        {// Regenerate session when signing in
+      // to prevent fixation
+      req.session.regenerate(function(){
+        // Store the user's primary key
+        // in the session store to be retrieved,
+        // or in this case the entire user object
+        var user=JSON.parse(JSON.stringify(data2));
+        req.session.user = user;
+        console.log("user is", user[0].userName);
+        req.session.success = 'Authenticated as ' + user[0].userName
+          + ' click to <a href="/logout">logout</a>. '
+          + ' You may now access <a href="/restricted">/restricted</a>.';
+        res.render('questions',{user:req.session.user[0].userName});
+      });
+    }
       else
         {
           errors.push({ param: 'password', msg: 'Password Is Incorrect', value: '' });
@@ -166,8 +186,10 @@ models.Users.findAll({
 });
 
 /*Get route for standings page*/
-
-  router.get('/standings/', function(req, res) {
+/*restrict function ensures that only a person who has logged in can view this page(AD)*/
+/*to get details of current user use session variable req.session.user[0].userName to 
+query database and display appropriate standings data(AD)*/  
+  router.get('/standings/',restrict, function(req, res) {
   models.Users.findAll({
   where: {
   	teamName: team
@@ -178,6 +200,8 @@ models.Users.findAll({
     // NEEDS TO BE UPDATED WITH TEAM NAME ONCE WE DECLARE IT
     
     res.render("standings", {
+  //username of logged in person will be displayed on top(AD)
+    user:req.session.user[0].userName,
     userName:data,
     team
     });
@@ -193,5 +217,18 @@ router.get('/', function(req, res) {
         res.render("index");
     });
 });
+//
+
+
+/*restrict function ensures that only a person who has logged in can view this page(AD)*/
+function restrict(req, res, next) {
+  if (req.session.user) {
+    next();
+  } else {
+    req.session.error = 'Access denied!';
+/*If not logged in they are redirectected to the login page (AD)*/
+    res.redirect('/');
+  }
+}
 
 module.exports = router;
