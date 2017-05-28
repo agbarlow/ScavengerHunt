@@ -1,6 +1,5 @@
 // Dependencies
 var express = require("express");
-//var cookieParser = require('cookie-parser');
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
 var methodOverride = require('method-override');
