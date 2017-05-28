@@ -5,6 +5,7 @@ $(document).ready(function() {
         if (this.value == 'default') {
             $("#new-team").show();
         } else {
+        	$("#newTeamName").val('');
             $("#new-team").hide();
         }
     });
