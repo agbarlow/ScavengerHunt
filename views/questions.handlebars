@@ -17,20 +17,25 @@ id='question3answer4' -SB
 <p>
   {{this.id}}. {{this.question}}
 </p>
+<form id="question{{@index}}" action="">
 <div class="radio" id="question{{this.id}}answer1">
-  <label><input type="radio" name="optradio">{{this.answer1}}</label>
+  <label><input type="radio" name="optradio" value='1'>{{this.answer1}}</label>
 </div>
 <div class="radio" id="question{{this.id}}answer2">
-  <label><input type="radio" name="optradio">{{this.answer2}}</label>
+  <label><input type="radio" name="optradio" value='2'>{{this.answer2}}</label>
 </div>
 <div class="radio" id="question{{this.id}}answer3">
-  <label><input type="radio" name="optradio">{{this.answer3}}</label>
+  <label><input type="radio" name="optradio" value='3'>{{this.answer3}}</label>
 </div>
 <div class="radio" id="question{{this.id}}answer4">
-  <label><input type="radio" name="optradio">{{this.answer4}}</label>
+  <label><input type="radio" name="optradio" value='4'>{{this.answer4}}</label>
 </div>
 <input type="submit" class="btn btn-success" value="Submit">
+</form>
 <br>
+
+{{else}}
+<b>Select a Land to Begin the Hunt!</b>
 {{/each}}
 </ul>
 
