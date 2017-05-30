@@ -1,6 +1,8 @@
+
 <div class="row main">
+    <div name = "error">{{error}}</div>
 	<div class="main-login main-center">
-			<form class="" method="post" action="#">
+			<form class="" method="POST" action="/registration">
 				<div class="form-group">
 					<label for="name" class="cols-sm-2 control-label">Your Name</label>
 					<div class="cols-sm-10">
@@ -42,7 +44,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-							<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+							<input type="password" class="form-control" name="confirmPassword" id="confirm"  placeholder="Confirm your Password"/>
 						</div>
 					</div>
 				</div>
@@ -51,7 +53,7 @@
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-							  <select class="form-control" id="sel1">
+							  <select class="form-control" name="team"  id="sel1">
 							    
 							  {{#each team}}
                               <option value="{{this.DISTINCT}}" >{{this.DISTINCT}}</option>
@@ -64,17 +66,35 @@
 				<b><span style="color:red">- OR -</span></b>
 				<br>
 				<div class="form-group">
-					<label for="username" class="cols-sm-2 control-label">Create a New Team</label>
+					<label for="new-team" class="cols-sm-2 control-label">Create a New Team</label>
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-							<input type="text" class="form-control" name="username" id="username"  placeholder="Enter your Username"/>
+							<input type="text" onclick="myFunction()" class="form-control" name="newteam" id="newTeamName"  placeholder="Enter new Team Name"/>
 						</div>
 					</div>
 				</div>
 				<div class="form-group ">
-					<a href="#" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">Register</a>
+					<button type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
 				</div>
+
+
 			</form>
 	</div>
+    
 </div>
+
+<script>
+/*function to disable newTeamName textbox if an existing team is selected*/
+  function   myFunction() {
+                var e = document.getElementById("sel1");
+                var strUser = e.options[e.selectedIndex].text;
+                if(strUser === "Add New Team"){
+                    document.getElementById("newTeamName").readOnly = false;
+                }
+                else{
+                    document.getElementById("newTeamName").value = document.getElementById("newTeamName").defaultValue;
+                    document.getElementById("newTeamName").readOnly = true;
+                }
+}
+    </script>

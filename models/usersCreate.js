@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define("Users", {
+  var User = sequelize.define("Users2s", {
     "userName"        : DataTypes.STRING,
     "teamName"        : DataTypes.STRING,
     "score"           : DataTypes.INTEGER,
@@ -13,6 +13,9 @@ module.exports = function(sequelize, DataTypes) {
     "Q8"              : DataTypes.INTEGER,
     "Q9"              : DataTypes.INTEGER,
     "Q10"             : DataTypes.INTEGER,
+    "password"        : DataTypes.STRING,
+    "email"           : DataTypes.STRING,
+    "name"            : DataTypes.STRING
 
   }
   );
