@@ -19,19 +19,54 @@ var team = "teamName";
 /*to get details of current user use session variable req.session.user[0].userName to 
 query database and display appropriate questions(AD)*/
 router.get('/land/:land', restrict, function(req, res) {
-    models.Questions.findAll({
+
+  models.Users.findAll({ 
         where: {
-            land: req.params.land
+            userName: req.session.user[0].userName
         }
-    }).then(function(data) {
-        //console.log(data);
-        res.render("questions", {
-            //username of logged in person will be displayed on top(AD)
-            user: req.session.user[0].userName,
-            question: data
-        });
-    });
-});
+    }).then(function(userQuestionData){
+          models.Questions.findAll({
+              where: {
+                  land: req.params.land
+              }
+          }).then(function(data) {
+              var JSONUserQuestions=JSON.parse(JSON.stringify(userQuestionData))[0];
+
+              var JSONData =JSON.parse(JSON.stringify(data));
+              console.log(JSON.parse(JSON.stringify(data)));
+              //console.log("data is ", data);
+              //console.log("JSONUserQuestions is : ",JSONUserQuestions);
+              //console.log("JSONData is : ", JSONData);
+              //console.log("Dho ho ho ",data[0].dataValues.id)
+              var arr =[];
+              for(var i = 0; i < (data.length); i++)
+              { 
+                 
+                var QNum=data[i].dataValues.id;
+                //console.log("e is ",QNum);
+                var questionNo='Q'+QNum;
+
+                var questionState= JSONUserQuestions[questionNo];
+                //Adding 'state' property to data. this will have a value of 0,10 or null . The questions
+                //need to be rendered according to the state. If data.state = null, the question is displayed.
+                //if data.state = 0, the question has been already answered incorrectly. 
+                //if data.state = 10, the question has been already answered correctly. 
+               
+                data[i].dataValues.state=questionState;
+                console.log("data[i].dataValues.state",data[i].dataValues.state);
+
+                console.log("JSON.parse(JSON.stringify(data))",JSON.parse(JSON.stringify(data)));
+
+              }
+              res.render("questions", {
+                  //username of logged in person will be displayed on top(AD)
+                  user: req.session.user[0].userName,
+                  question: data,
+                  userData: userQuestionData
+              });
+          });
+      });
+ });
 
 //post route to collect/validate/save registration info 
 router.post('/registration', function(req, res, next) {
@@ -125,7 +160,7 @@ router.post('/', function(req, res) {
             userName: req.body.username
         }
     }).then(function(data2) {
-        console.log(JSON.stringify(data2));
+       // console.log(JSON.stringify(data2));
         //find if username exists
         var errors = [];
         if (data2.length < 1) {
