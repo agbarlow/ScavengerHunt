@@ -1,8 +1,10 @@
-<a href="/Adventureland">Adventureland</a> - 
-<a href="/Frontierland">Frontierland</a> - 
-<a href="/LibertySquare">Liberty Square</a> - 
-<a href="/Fantasyland">Fantasyland</a> - 
-<a href="/Tomorrowland">Tomorrowland</a><br><br>
+<div>Welcome {{user}} ! </div>
+<div><a href="/logout">logout</a></div>
+<a href="/land/MainSt">Main Street USA</a> - 
+<a href="/land/Adventureland">Adventureland</a> - 
+<a href="/land/Frontierland">Frontierland</a> - 
+<a href="/land/Fantasyland">Fantasyland</a> - 
+<a href="/land/Tomorrowland">Tomorrowland</a><br><br>
 
 
 <!-- Create a list for each question in this specific 'land'
@@ -12,23 +14,31 @@ id='question3answer4' -SB
  -->
  <ul>
 {{#each question}}
-<p>
-  {{this.id}}. {{this.question}}
+     <!-- if question.state returns a 'falsy' value
+ -->
+ {{!#unless question.dataValues.state}} 
+ <p>
+  {{this.id}}.{{this.question}}
 </p>
+<form id="question{{@index}}" action="">
 <div class="radio" id="question{{this.id}}answer1">
-  <label><input type="radio" name="optradio">{{this.answer1}}</label>
+  <label><input type="radio" name="optradio" value='1'>{{this.answer1}}</label>
 </div>
 <div class="radio" id="question{{this.id}}answer2">
-  <label><input type="radio" name="optradio">{{this.answer2}}</label>
+  <label><input type="radio" name="optradio" value='2'>{{this.answer2}}</label>
 </div>
 <div class="radio" id="question{{this.id}}answer3">
-  <label><input type="radio" name="optradio">{{this.answer3}}</label>
+  <label><input type="radio" name="optradio" value='3'>{{this.answer3}}</label>
 </div>
 <div class="radio" id="question{{this.id}}answer4">
-  <label><input type="radio" name="optradio">{{this.answer4}}</label>
+  <label><input type="radio" name="optradio" value='4'>{{this.answer4}}</label>
 </div>
 <input type="submit" class="btn btn-success" value="Submit">
+</form>
 <br>
+{{!/unless}}
+{{else}}
+<b>Select a Land to Begin the Hunt!</b>
 {{/each}}
 </ul>
 

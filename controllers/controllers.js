@@ -11,115 +11,184 @@ var router = express.Router();
 
 
 // WILL NEED TO REMOVE OR CHANGE ONCE WE DECLARE TEAM NAME
-var team = "Clemson";
+var team = "teamName";
 
 //   ***The One Route to Route them all***
 // Route used to retrieve questions for any land
-router.get('/land/:land', function(req, res) {
-    models.Questions.findAll({
+/*restrict function ensures that only a person who has logged in can view this page(AD)*/
+/*to get details of current user use session variable req.session.user[0].userName to 
+query database and display appropriate questions(AD)*/
+router.get('/land/:land', restrict, function(req, res) {
+
+  models.Users.findAll({ 
         where: {
-            land: req.params.land
+            userName: req.session.user[0].userName
         }
-    }).then(function(data) {
-        console.log(data);
-        /*Render index.handlebars on root route*/
-        res.render("questions", { question: data });
-    });
-});
+    }).then(function(userQuestionData){
+          models.Questions.findAll({
+              where: {
+                  land: req.params.land
+              }
+          }).then(function(data) {
+              var JSONUserQuestions=JSON.parse(JSON.stringify(userQuestionData))[0];
+
+              var JSONData =JSON.parse(JSON.stringify(data));
+              console.log(JSON.parse(JSON.stringify(data)));
+              //console.log("data is ", data);
+              //console.log("JSONUserQuestions is : ",JSONUserQuestions);
+              //console.log("JSONData is : ", JSONData);
+              //console.log("Dho ho ho ",data[0].dataValues.id)
+              var arr =[];
+              for(var i = 0; i < (data.length); i++)
+              { 
+                 
+                var QNum=data[i].dataValues.id;
+                //console.log("e is ",QNum);
+                var questionNo='Q'+QNum;
+
+                var questionState= JSONUserQuestions[questionNo];
+                //Adding 'state' property to data. this will have a value of 0,10 or null . The questions
+                //need to be rendered according to the state. If data.state = null, the question is displayed.
+                //if data.state = 0, the question has been already answered incorrectly. 
+                //if data.state = 10, the question has been already answered correctly. 
+               
+                data[i].dataValues.state=questionState;
+                console.log("data[i].dataValues.state",data[i].dataValues.state);
+
+                console.log("JSON.parse(JSON.stringify(data))",JSON.parse(JSON.stringify(data)));
+
+              }
+              res.render("questions", {
+                  //username of logged in person will be displayed on top(AD)
+                  user: req.session.user[0].userName,
+                  question: data,
+                  userData: userQuestionData
+              });
+          });
+      });
+ });
 
 //post route to collect/validate/save registration info 
-
 router.post('/registration', function(req, res, next) {
-    console.log("Start POST" + req.body);
-
-  req.check('email', 'Invalid email address').isEmail();
-  req.check('password', 'Passwords dont match').equals(req.body.confirmPassword);
-  req.check('password', 'Password too short').isLength({min: 4});
-  req.check('username', 'Username cannot be empty').isLength({min: 1});
-  req.check('name', 'Name cannot be empty').isLength({min: 1});
-  var errors = req.validationErrors();
-  if (errors) {
-  	console.log(errors);
-  	//To populate teamname dropdown
-  	 models.Users2s.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
-  	 //find if username already exists
-  	 models.Users2s.findAll({ where: {
-     userName:req.body.username
-     }}).then(function(data2) {
-     //find if new team name already exists
-     models.Users2s.findAll({ where: {
-     teamName:req.body.newteam
-     }}).then(function(data3) {
-     	
-     	console.log("data3 is " + data3 + "length is:" + data3.length)
-
-
-    if(data3.length>0)
-    {
-    errors.push({ param: 'teamname', msg: 'teamname already exists', value: '' });
-    console.log(errors);
+    /*This IF statement is so that if team=default (default is when
+    the dropdown is set to Add New Team), then team gets
+    the value of newteam. -SB */
+    if (req.body.team === "default") {
+        req.body.team = req.body.newteam;
     }
-    if(data2.length>0)
-    {
-    errors.push({ param: 'username', msg: 'username already exists', value: '' });
-    console.log(errors);
+
+    /* Validation checks for user inputs. Added 'team' as a required field. -SB */
+    req.check('email', 'Invalid email address format.').isEmail();
+    req.check('password', 'Passwords do not match.').equals(req.body.confirmPassword);
+    req.check('password', 'Password must be at least 6 characters.').isLength({ min: 6 });
+    req.check('username', 'Username is a required field.').isLength({ min: 1 });
+    req.check('name', 'Name is a required field.').isLength({ min: 1 });
+    req.check('team', 'You must join an existing team, or create a new one.').isLength({ min: 1 });
+    var errors = req.validationErrors();
+
+
+    /*If none of the errors above are triggered, errors gets set to 'false'
+    instead of an array.  Since the validation below pushes errors to an
+    array, we have to change it to an array IF it passes the above validation. -SB */
+    if (!errors) {
+        errors = [];
     }
-  });  
-  });
 
-    	data.push({DISTINCT:'Add New Team'})
- 
-        res.render('registration', {
-      error: errors,
-       team : data 
-    });
-        
-    });
-  	
-    req.session.errors = errors;
-    req.session.success = false;
-  } else {
-    // This runs if all validation has been passed
-    // Create a new user row in table
-    if (team=true){
-      var userTeam = req.body.team
-    };
-    if (team=false){
-      var userTeam = req.body.newteam
-    };
+    /*inputData will store the users inputs in order to repopulate them
+    when there is an error* -SB */
+    var inputData = {
+        name: req.body.name,
+        email: req.body.email,
+        username: req.body.username,
+        team: req.body.team
+    }
 
-    models.Users2s.create({
-      name: req.body.name,
-      password: req.body.password,
-      email: req.body.email,
-      userName: req.body.name,
-      teamName: userTeam
-
+    //To populate teamname dropdown
+    models.Users.aggregate('teamname', 'DISTINCT', {
+        plain: false
     }).then(function(data) {
-    // This is the page destination after new user has been registered
-      res.render('standings');
+        models.Users.findOne({
+            where: {
+                userName: req.body.username
+            }
+        }).then(function(data2) {
+            if (data2) {
+                errors.push({ param: 'username', msg: 'Username has already registered.', value: '' });
+            }
+            //find if new team name already exists
+            models.Users.findOne({
+                where: {
+                    teamName: req.body.newteam
+                }
+            }).then(function(data3) {
+                if (data3) {
+                    errors.push({ param: 'teamname', msg: 'Team already exists.', value: '' });
+                }
+                if (errors.length > 0) {
+                    /* If errors, reload the page and send back the errors
+                    along with the users current inputs to repopulate forms. -SB */
+                    res.render('registration', {
+                        error: errors,
+                        team: data,
+                        inputData: inputData
+                    });
+                    req.session.errors = errors;
+                    req.session.success = false;
+                } else {
+                    /* No errors, create the user and save it to the database.*/
+                    req.session.success = true;
+                    models.Users.create({
+                        "userName": req.body.username,
+                        "teamName": req.body.team,
+                        "score": 0,
+                        "password": req.body.password,
+                        "email": req.body.email,
+                        "name": req.body.name
+                    }).then(function(data) {
+                        /*then, redirect to login page. we can change this later to log in directly*/
+                        res.redirect('/');
+                    });
+                }
+            });
+        });
     });
-    req.session.success = true;
-    return;
-  }
-  
 });
 
-// POST route for creating a new user
-  router.post("/api/newuser", function(req, res) {
-    // create takes an argument of an object describing the item we want to
-    // insert into our table. In this case we just we pass in an object with a text
-    // and complete property (req.body)
-    db.Users.create({
-      userName: req.body.userName,
-      teamName: req.body.teamName
-    }).then(function(data) {
-      // We have access to the new todo as an argument inside of the callback function
-      console.log("END POINT" + data);
+// Login page validations with database
+router.post('/', function(req, res) {
+    models.Users.findAll({
+        where: {
+            userName: req.body.username
+        }
+    }).then(function(data2) {
+       // console.log(JSON.stringify(data2));
+        //find if username exists
+        var errors = [];
+        if (data2.length < 1) {
+            errors.push({ param: 'username', msg: 'Username Does Not Exist', value: '' });
+            res.render("index", { error: errors });
+        }
+        if (data2.length > 0) {
+            if (JSON.parse(JSON.stringify(data2))[0].password == req.body.password) { // Regenerate session when signing in
+                // to prevent fixation
+                req.session.regenerate(function() {
+                    // Store the user's primary key
+                    // in the session store to be retrieved,
+                    // or in this case the entire user object
+                    var user = JSON.parse(JSON.stringify(data2));
+                    req.session.user = user;
+                    console.log("user is", user[0].userName);
+                    req.session.success = 'Authenticated as ' + user[0].userName + ' click to <a href="/logout">logout</a>. ' + ' You may now access <a href="/restricted">/restricted</a>.';
+                    res.render('questions', { user: req.session.user[0].userName });
+                });
+            } else {
+                errors.push({ param: 'password', msg: 'Password Is Incorrect', value: '' });
+                res.render("index", { error: errors });
+            }
+        }
+
     });
-  });
-
-
+});
 
 // To check if a usename is unique 
 router.get('/username/:username', function(req, res) {
@@ -129,10 +198,12 @@ router.get('/username/:username', function(req, res) {
         }
     }).then(function(data) {
 
-        console.log(data);
+        // console.log(data);
 
     });
 });
+
+//Is this still needed? 
 //To create an entry for a new user and log to console
 router.get('/username/:username', function(req, res) {
   models.Users2s.create({
@@ -147,52 +218,61 @@ router.get('/username/:username', function(req, res) {
 
 /*Get route for registration page*/
 router.get('/registration', function(req, res) {
-    models.Users2s.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
-    	data.push({DISTINCT:'Add New Team'})
-        res.render("registration", { team : data });
-        console.log(data);
+    models.Users.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
+        res.render("registration", { team: data });
+        //  console.log(data);
     });
 });
 
-
-// To check if a usename is unique
-// models.Users2s.findAll({
-//     where: {
-//         userName: 'arumita'
-//     }
-// }).then(function(data) {
-//     console.log(data);
-// });
-
 /*Get route for standings page*/
-
-  router.get('/standings/', function(req, res) {
-  models.Users2s.findAll({
-  where: {
-  	teamName: team
-  	}
-  	}).then(function(data) {
-    //console.log(data);
-    
-    
-    // NEEDS TO BE UPDATED WITH TEAM NAME ONCE WE DECLARE IT
-    
-    /*Render index.handlebars on root route*/
-    res.render("standings", {
-    userName:data,
-    team
+/*restrict function ensures that only a person who has logged in can view this page(AD)*/
+/*to get details of current user use session variable req.session.user[0].userName to 
+query database and display appropriate standings data(AD)*/
+router.get('/standings/', restrict, function(req, res) {
+    models.Users.findAll({
+        where: {
+            teamName: team
+        },
+        order: "score DESC"
+    }).then(function(data) {
+        //console.log(data);
+        // NEEDS TO BE UPDATED WITH TEAM NAME ONCE WE DECLARE IT
+        res.render("standings", {
+            //username of logged in person will be displayed on top(AD)
+            user: req.session.user[0].userName,
+            userName: data,
+            team
+        });
     });
-    });
-  });
+});
 // To check if a usename is unique
 
 
-
+//To create an entry for a new user
 router.get('/', function(req, res) {
     models.Questions.findAll().then(function(data) {
-        console.log(data);
+        //console.log(data);
         res.render("index");
     });
 });
+//
+// Logout endpoint
+router.get('/logout', function(req, res) {
+    // destroy session and logout(AD)
+    req.session.destroy(function() {
+        //redirect to login page(AD)
+        res.redirect('/');
+    });
+});
+/*restrict function ensures that only a person who has logged in can view this page(AD)*/
+function restrict(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        req.session.error = 'Access denied!';
+        /*If not logged in they are redirectected to the login page (AD)*/
+        res.redirect('/');
+    }
+}
 
 module.exports = router;

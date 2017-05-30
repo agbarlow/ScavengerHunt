@@ -1,8 +1,12 @@
+<div>Welcome {{user}} ! </div>
+<div><a href="/logout">logout</a></div>
 <!-- Simple Layout for pushing Data to Standings Page- AGB  -->
-<a href="">Return to Questions</a>
- 
+<a href="/land/MainSt">Main Street USA</a> - 
+<a href="/land/Adventureland">Adventureland</a> - 
+<a href="/land/Frontierland">Frontierland</a> - 
+<a href="/land/Fantasyland">Fantasyland</a> - 
+<a href="/land/Tomorrowland">Tomorrowland</a><br>
 <h1>Standings for {{team}}</h1>
-
 <ol>
 {{#each userName}}
   <li>{{{this.userName}}} - {{{this.score}}} </li>
