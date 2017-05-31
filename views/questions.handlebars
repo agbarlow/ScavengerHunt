@@ -31,7 +31,7 @@ id='question3answer4' -SB
 	<div id="questions">
 		<div id="question-title">Question Number {{id}}</div>
 		<p>{{question}}</p>
-    <form id="question{{@index}}" METHOD="post" action="/answers">
+    <form id="question{{@index}}" METHOD="post" action="">
     <input type="hidden" name="id" value="{{id}}" />
 		<div class="radio" id="question{{this.id}}answer1">
 		  <label><input type="radio" name="optradio" value='1'>{{this.answer1}}</label>

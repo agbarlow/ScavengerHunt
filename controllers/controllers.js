@@ -13,7 +13,7 @@ var router = express.Router();
 // WILL NEED TO REMOVE OR CHANGE ONCE WE DECLARE TEAM NAME
 var team = "teamName";
 
-router.post('/answers',restrict, function(req, res) {
+router.post('/land/:land',restrict, function(req, res) {
   //console.log("req.body.optradio is : ", req.body.optradio);
   //console.log("req.body.id is : " ,JSON.stringify(req.body)); 
 console.log("req received");
@@ -36,8 +36,8 @@ if (req.body.id == 1) {
 
             }
         }).then(function(data) {
-            /*then, redirect to login page. we can change this later to log in directly*/
-            res.render('questions', {result:"Right answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
     } else {
         models.Users.update({
@@ -48,8 +48,8 @@ if (req.body.id == 1) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-            /*then, redirect to login page. we can change this later to log in directly*/
-            res.render('questions', {result:"Wrong answer!"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
 
     }
@@ -64,8 +64,8 @@ if (req.body.id == 2) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-            /*then, redirect to login page. we can change this later to log in directly*/
-            res.render('questions', {result:"Right answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
     } else {
         models.Users.update({
@@ -76,8 +76,8 @@ if (req.body.id == 2) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-            /*then, redirect to login page. we can change this later to log in directly*/
-            console.log(data);
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
 
     }
@@ -92,8 +92,8 @@ if (req.body.id == 3) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-            
-            res.render('questions', {result:"Right answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
             });
     } else {
         models.Users.update({
@@ -104,7 +104,8 @@ if (req.body.id == 3) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-           res.render('questions', {result:"Wrong answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
 
     }
@@ -119,8 +120,8 @@ if (req.body.id == 4) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-           
-           res.render('questions', {result:"Right answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
            });
     } else {
         models.Users.update({
@@ -131,7 +132,8 @@ if (req.body.id == 4) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-           res.render('questions', {result:"Wrong answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
 
     }
@@ -147,7 +149,8 @@ if (req.body.id == 5) {
             }
         }).then(function(data) {
             
-          res.render('questions', {result:"Right answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
     } else {
         models.Users.update({
@@ -158,7 +161,8 @@ if (req.body.id == 5) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-            res.render('questions', {result:"Wrong answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
 
     }
@@ -173,7 +177,8 @@ if (req.body.id == 6) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-            res.render('questions', {result:"Right answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
     } else {
         models.Users.update({
@@ -184,7 +189,8 @@ if (req.body.id == 6) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-            res.render('questions', {result:"Wrong answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
 
     }
@@ -199,7 +205,8 @@ if (req.body.id == 7) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-            res.render('questions', {result:"Right answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
     } else {
         models.Users.update({
@@ -210,7 +217,8 @@ if (req.body.id == 7) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-            res.render('questions', {result:"Wrong answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
 
     }
@@ -225,7 +233,8 @@ if (req.body.id == 8) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-            res.render('questions', {result:"Right answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
     } else {
         models.Users.update({
@@ -236,7 +245,8 @@ if (req.body.id == 8) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-           res.render('questions', {result:"Wrong answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
 
     }
@@ -251,7 +261,8 @@ if (req.body.id == 9) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-           res.render('questions', {result:"Right answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
     } else {
         models.Users.update({
@@ -262,7 +273,8 @@ if (req.body.id == 9) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-            res.render('questions', {result:"Wrong answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
 
     }
@@ -277,7 +289,8 @@ if (req.body.id == 10) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-           res.render('questions', {result:"Right answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
     } else {
         models.Users.update({
@@ -288,7 +301,8 @@ if (req.body.id == 10) {
                 userName: req.session.user[0].userName
             }
         }).then(function(data) {
-           res.render('questions', {result:"Wrong answer !"});
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
         });
 
     }
