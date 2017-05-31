@@ -13,6 +13,291 @@ var router = express.Router();
 // WILL NEED TO REMOVE OR CHANGE ONCE WE DECLARE TEAM NAME
 var team = "teamName";
 
+router.post('/answers',restrict, function(req, res) {
+  //console.log("req.body.optradio is : ", req.body.optradio);
+  //console.log("req.body.id is : " ,JSON.stringify(req.body)); 
+console.log("req received");
+console.log("req is " , req.body);
+ // res.send(req.body.optradio);
+  models.Questions.findAll({
+where: {
+    id: req.body.id
+}
+}).then(function(data) {
+var correctAnswer = data[0].correctAnswer;
+if (req.body.id == 1) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q1: 10
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+
+            }
+        }).then(function(data) {
+            /*then, redirect to login page. we can change this later to log in directly*/
+            res.render('questions', {result:"Right answer !"});
+        });
+    } else {
+        models.Users.update({
+            Q1: 0
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*then, redirect to login page. we can change this later to log in directly*/
+            res.render('questions', {result:"Wrong answer!"});
+        });
+
+    }
+}
+if (req.body.id == 2) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q2: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*then, redirect to login page. we can change this later to log in directly*/
+            res.render('questions', {result:"Right answer !"});
+        });
+    } else {
+        models.Users.update({
+            Q2: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*then, redirect to login page. we can change this later to log in directly*/
+            console.log(data);
+        });
+
+    }
+}
+if (req.body.id == 3) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q3: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            
+            res.render('questions', {result:"Right answer !"});
+            });
+    } else {
+        models.Users.update({
+            Q3: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+           res.render('questions', {result:"Wrong answer !"});
+        });
+
+    }
+}
+if (req.body.id == 4) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q4: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+           
+           res.render('questions', {result:"Right answer !"});
+           });
+    } else {
+        models.Users.update({
+            Q4: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+           res.render('questions', {result:"Wrong answer !"});
+        });
+
+    }
+}
+if (req.body.id == 5) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q5: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            
+          res.render('questions', {result:"Right answer !"});
+        });
+    } else {
+        models.Users.update({
+            Q5: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            res.render('questions', {result:"Wrong answer !"});
+        });
+
+    }
+}
+if (req.body.id == 6) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q6: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            res.render('questions', {result:"Right answer !"});
+        });
+    } else {
+        models.Users.update({
+            Q6: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            res.render('questions', {result:"Wrong answer !"});
+        });
+
+    }
+}
+if (req.body.id == 7) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q7: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            res.render('questions', {result:"Right answer !"});
+        });
+    } else {
+        models.Users.update({
+            Q7: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            res.render('questions', {result:"Wrong answer !"});
+        });
+
+    }
+}
+if (req.body.id == 8) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q8: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            res.render('questions', {result:"Right answer !"});
+        });
+    } else {
+        models.Users.update({
+            Q8: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+           res.render('questions', {result:"Wrong answer !"});
+        });
+
+    }
+}
+if (req.body.id == 9) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q9: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+           res.render('questions', {result:"Right answer !"});
+        });
+    } else {
+        models.Users.update({
+            Q9: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            res.render('questions', {result:"Wrong answer !"});
+        });
+
+    }
+}
+if (req.body.id == 10) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q10: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+           res.render('questions', {result:"Right answer !"});
+        });
+    } else {
+        models.Users.update({
+            Q10: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+           res.render('questions', {result:"Wrong answer !"});
+        });
+
+    }
+}
+});
+
+});
+
+
 //   ***The One Route to Route them all***
 // Route used to retrieve questions for any land
 /*restrict function ensures that only a person who has logged in can view this page(AD)*/
@@ -54,7 +339,6 @@ router.get('/land/:land', restrict, function(req, res) {
                     data[i].isCorrect = false;
                 }
               }
-              
               res.render("questions", {
                   //username of logged in person will be displayed on top[AD]
                   user: req.session.user[0].userName,
