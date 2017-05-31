@@ -218,7 +218,7 @@ query database and display appropriate standings data(AD)*/
 router.get('/standings/', restrict, function(req, res) {
     models.Users.findAll({
         where: {
-            teamName: team
+            teamName: req.session.user[0].teamName
         },
         order: "score DESC"
     }).then(function(data) {
@@ -228,7 +228,7 @@ router.get('/standings/', restrict, function(req, res) {
             //username of logged in person will be displayed on top(AD)
             user: req.session.user[0].userName,
             userName: data,
-            team
+            team: req.session.user[0].teamName
         });
     });
 });
