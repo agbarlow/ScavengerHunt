@@ -25,41 +25,29 @@ router.get('/land/:land', restrict, function(req, res) {
             userName: req.session.user[0].userName
         }
     }).then(function(userQuestionData){
+
           models.Questions.findAll({
               where: {
                   land: req.params.land
               }
           }).then(function(data) {
-              var JSONUserQuestions=JSON.parse(JSON.stringify(userQuestionData))[0];
-
-              var JSONData =JSON.parse(JSON.stringify(data));
-              console.log(JSON.parse(JSON.stringify(data)));
-              //console.log("data is ", data);
-              //console.log("JSONUserQuestions is : ",JSONUserQuestions);
-              //console.log("JSONData is : ", JSONData);
-              //console.log("Dho ho ho ",data[0].dataValues.id)
-              var arr =[];
+             //To find the state of the question, whether it is unanswered(null), answered right(10)
+             // or answered wrong[AD]
               for(var i = 0; i < (data.length); i++)
-              { 
-                 
-                var QNum=data[i].dataValues.id;
-                //console.log("e is ",QNum);
+              {          
+                var QNum=data[i].id;
                 var questionNo='Q'+QNum;
-
-                var questionState= JSONUserQuestions[questionNo];
-                //Adding 'state' property to data. this will have a value of 0,10 or null . The questions
+                var questionState= userQuestionData[0][questionNo];
+                //Adding 'state' property to data. this will have a value of 0,10 or 1 . The questions
                 //need to be rendered according to the state. If data.state = null, the question is displayed.
-                //if data.state = 0, the question has been already answered incorrectly. 
-                //if data.state = 10, the question has been already answered correctly. 
-               
-                data[i].dataValues.state=questionState;
-                console.log("data[i].dataValues.state",data[i].dataValues.state);
-
-                console.log("JSON.parse(JSON.stringify(data))",JSON.parse(JSON.stringify(data)));
-
+                //if data.state = 1, the question has been already answered incorrectly. 
+                //if data.state = 10, the question has been already answered correctly. [AD]
+                var qState=parseInt(questionState);
+                data[i].state=qState;
               }
+              console.log(data[0]);
               res.render("questions", {
-                  //username of logged in person will be displayed on top(AD)
+                  //username of logged in person will be displayed on top[AD]
                   user: req.session.user[0].userName,
                   question: data,
                   userData: userQuestionData

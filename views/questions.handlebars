@@ -16,9 +16,9 @@ id='question3answer4' -SB
 {{#each question}}
      <!-- if question.state returns a 'falsy' value
  -->
- {{!#unless question.dataValues.state}} 
+ {{#unless state}} 
  <p>
-  {{this.id}}.{{this.question}}
+  {{id}}.{{question}}
 </p>
 <form id="question{{@index}}" action="">
 <div class="radio" id="question{{this.id}}answer1">
@@ -36,7 +36,7 @@ id='question3answer4' -SB
 <input type="submit" class="btn btn-success" value="Submit">
 </form>
 <br>
-{{!/unless}}
+{{/unless}}
 {{else}}
 <b>Select a Land to Begin the Hunt!</b>
 {{/each}}
