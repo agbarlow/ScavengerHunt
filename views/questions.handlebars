@@ -15,36 +15,41 @@ id='question3answer4' -SB
 
  <ul>
 {{#each question}}
-     <!-- if question.state returns a false value
- -->
- {{#unless state}} 
-
- <p>
-  {{id}}.{{question}}
-</p>
-<form id="question{{@index}}" METHOD="post" action="/answers">
-<input type="hidden" name="id" value="{{id}}" />
-<div class="radio" id="question{{this.id}}answer1">
-  <label><input type="radio" name="optradio" value='1'>{{this.answer1}}</label>
-</div>
-<div class="radio" id="question{{this.id}}answer2">
-  <label><input type="radio" name="optradio" value='2'>{{this.answer2}}</label>
-</div>
-<div class="radio" id="question{{this.id}}answer3">
-  <label><input type="radio" name="optradio" value='3'>{{this.answer3}}</label>
-</div>
-<div class="radio" id="question{{this.id}}answer4">
-  <label><input type="radio" name="optradio" value='4'>{{this.answer4}}</label>
-</div>
-<input type="submit" class="btn btn-success" value="Submit">
-</form>
-<br>
-
-{{/unless}}
+	{{#if isAnswered}}
+		 	{{#if isCorrect}}
+		 		<div id='correct'>YOU GOT QUESTION {{this.id}} CORRECT! YOU GET 10 POINTS!</div>
+		 	{{else}}
+		 		<div id='incorrect'>YOU GOT QUESTION {{this.id}} INCORRECT! YOU GET 0 POINTS!</div>
+			{{/if}}
+	{{else}}
+	<div id="questions">
+		<div id="question-title">Question Number {{id}}</div>
+		<p>{{question}}</p>
+    <form id="question{{@index}}" METHOD="post" action="/answers">
+    <input type="hidden" name="id" value="{{id}}" />
+		<div class="radio" id="question{{this.id}}answer1">
+		  <label><input type="radio" name="optradio" value='1'>{{this.answer1}}</label>
+		</div>
+		<div class="radio" id="question{{this.id}}answer2">
+		  <label><input type="radio" name="optradio" value='2'>{{this.answer2}}</label>
+		</div>
+		<div class="radio" id="question{{this.id}}answer3">
+		  <label><input type="radio" name="optradio" value='3'>{{this.answer3}}</label>
+		</div>
+		<div class="radio" id="question{{this.id}}answer4">
+		  <label><input type="radio" name="optradio" value='4'>{{this.answer4}}</label>
+		</div>
+		<input type="submit" class="btn btn-success" value="Submit">
+		</form>
+	</div>
+		<br>
+	{{/if}}
 {{else}}
-<b>Select a Land to Begin the Hunt!</b>
+<div id="begin">Select a Land to Begin the Hunt!</div>
 {{/each}}
 </ul>
 
+
 <p>{{result}}</p>
+
 <a href="/standings">View Standings</a> 

@@ -320,17 +320,25 @@ router.get('/land/:land', restrict, function(req, res) {
              // or answered wrong[AD]
               for(var i = 0; i < (data.length); i++)
               {          
-                var QNum=data[i].id;
-                var questionNo='Q'+QNum;
+                var questionNo='Q'+data[i].id;
                 var questionState= userQuestionData[0][questionNo];
                 //Adding 'state' property to data. this will have a value of 0,10 or 1 . The questions
                 //need to be rendered according to the state. If data.state = null, the question is displayed.
                 //if data.state = 1, the question has been already answered incorrectly. 
                 //if data.state = 10, the question has been already answered correctly. [AD]
-                var qState=parseInt(questionState);
-                data[i].state=qState;
+
+                /*if statements below take the questionState and update the isAnswered/isCorrect
+                boolean values since Handlebars only likes bools. -SB */
+                if(questionState == null){
+                    data[i].isAnswered = false;
+                } else if(questionState === 10){
+                    data[i].isAnswered = true;
+                    data[i].isCorrect = true;
+                } else if(questionState === 0){
+                    data[i].isAnswered = true;
+                    data[i].isCorrect = false;
+                }
               }
-              //console.log(data[0]);
               res.render("questions", {
                   //username of logged in person will be displayed on top[AD]
                   user: req.session.user[0].userName,
@@ -494,7 +502,7 @@ query database and display appropriate standings data(AD)*/
 router.get('/standings/', restrict, function(req, res) {
     models.Users.findAll({
         where: {
-            teamName: team
+            teamName: req.session.user[0].teamName
         },
         order: "score DESC"
     }).then(function(data) {
@@ -504,7 +512,7 @@ router.get('/standings/', restrict, function(req, res) {
             //username of logged in person will be displayed on top(AD)
             user: req.session.user[0].userName,
             userName: data,
-            team
+            team: req.session.user[0].teamName
         });
     });
 });
