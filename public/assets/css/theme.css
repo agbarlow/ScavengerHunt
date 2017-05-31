@@ -145,3 +145,16 @@ span.input-group-addon i {
 .error-list{
     color:red;
 }
+
+#correct{
+    color:green;
+    font-weight: bolder;
+    padding: 20px;
+}
+
+#incorrect{
+    color:red;
+    font-weight: bolder;
+    padding: 20px;
+}
+;

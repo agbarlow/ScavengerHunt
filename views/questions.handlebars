@@ -1,4 +1,4 @@
-<div>Welcome {{user}} ! </div>
+<div>Welcome {{user}}! </div>
 <div><a href="/logout">logout</a></div>
 <a href="/land/MainSt">Main Street USA</a> - 
 <a href="/land/Adventureland">Adventureland</a> - 
@@ -16,9 +16,15 @@ id='question3answer4' -SB
 {{#each question}}
 	{{#if isAnswered}}
 		 	{{#if isCorrect}}
-		 		<div id='correct'>YOU GOT QUESTION {{this.id}} CORRECT! YOU GET 10 POINTS!</div>
+				<div id='correct'>
+				<i class="fa fa-check-circle-o fa-5x" aria-hidden="true" style="color:green"></i>
+		 		<br>YOU GOT QUESTION {{this.id}} CORRECT! YOU GET 10 POINTS!
+		 		</div>
 		 	{{else}}
-		 		<div id='incorrect'>YOU GOT QUESTION {{this.id}} INCORRECT! YOU GET 0 POINTS!</div>
+		 		<div id='incorrect'>
+		 		<i class="fa fa-window-close-o fa-5x" aria-hidden="true"  style="color:red"></i>
+		 		<br>QUESTION {{this.id}} WAS INCORRECT! YOU GET 0 POINTS!
+		 		</div>
 			{{/if}}
 	{{else}}
 	<div id="questions">
@@ -43,7 +49,7 @@ id='question3answer4' -SB
 		<br>
 	{{/if}}
 {{else}}
-<div id="begin">Select a Land to Begin the Hunt!</div>
+<div id="begin">Welcome to our Scavenger Hunt!<br>Select a Land to Begin.</div>
 {{/each}}
 </ul>
 
