@@ -1,4 +1,4 @@
-<div>Welcome {{user}} ! </div>
+<div>Welcome {{user}}! </div>
 <div><a href="/logout">logout</a></div>
 <a href="/land/MainSt">Main Street USA</a> - 
 <a href="/land/Adventureland">Adventureland</a> - 
@@ -12,35 +12,50 @@ load each question, the 4 answer options and a submit button.
 Each answer has a specific id, i.e. question 3 answer 4 would be
 id='question3answer4' -SB
  -->
+
  <ul>
 {{#each question}}
-     <!-- if question.state returns a 'falsy' value
- -->
- {{!#unless question.dataValues.state}} 
- <p>
-  {{this.id}}.{{this.question}}
-</p>
-<form id="question{{@index}}" action="">
-<div class="radio" id="question{{this.id}}answer1">
-  <label><input type="radio" name="optradio" value='1'>{{this.answer1}}</label>
-</div>
-<div class="radio" id="question{{this.id}}answer2">
-  <label><input type="radio" name="optradio" value='2'>{{this.answer2}}</label>
-</div>
-<div class="radio" id="question{{this.id}}answer3">
-  <label><input type="radio" name="optradio" value='3'>{{this.answer3}}</label>
-</div>
-<div class="radio" id="question{{this.id}}answer4">
-  <label><input type="radio" name="optradio" value='4'>{{this.answer4}}</label>
-</div>
-<input type="submit" class="btn btn-success" value="Submit">
-</form>
-<br>
-{{!/unless}}
+	{{#if isAnswered}}
+		 	{{#if isCorrect}}
+				<div id='correct'>
+				<i class="fa fa-check-circle-o fa-5x" aria-hidden="true" style="color:green"></i>
+		 		<br>YOU GOT QUESTION {{this.id}} CORRECT! YOU GET 10 POINTS!
+		 		</div>
+		 	{{else}}
+		 		<div id='incorrect'>
+		 		<i class="fa fa-window-close-o fa-5x" aria-hidden="true"  style="color:red"></i>
+		 		<br>QUESTION {{this.id}} WAS INCORRECT! YOU GET 0 POINTS!
+		 		</div>
+			{{/if}}
+	{{else}}
+	<div id="questions">
+		<div id="question-title">Question Number {{id}}</div>
+		<p>{{question}}</p>
+    <form id="question{{@index}}" METHOD="post" action="">
+    <input type="hidden" name="id" value="{{id}}" />
+		<div class="radio" id="question{{this.id}}answer1">
+		  <label><input type="radio" name="optradio" value='1'>{{this.answer1}}</label>
+		</div>
+		<div class="radio" id="question{{this.id}}answer2">
+		  <label><input type="radio" name="optradio" value='2'>{{this.answer2}}</label>
+		</div>
+		<div class="radio" id="question{{this.id}}answer3">
+		  <label><input type="radio" name="optradio" value='3'>{{this.answer3}}</label>
+		</div>
+		<div class="radio" id="question{{this.id}}answer4">
+		  <label><input type="radio" name="optradio" value='4'>{{this.answer4}}</label>
+		</div>
+		<input type="submit" class="btn btn-success" value="Submit">
+		</form>
+	</div>
+		<br>
+	{{/if}}
 {{else}}
-<b>Select a Land to Begin the Hunt!</b>
+<div id="begin">Welcome to our Scavenger Hunt!<br>Select a Land to Begin.</div>
 {{/each}}
 </ul>
 
+
+<p>{{result}}</p>
 
 <a href="/standings">View Standings</a> 

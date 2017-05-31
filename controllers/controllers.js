@@ -13,6 +13,305 @@ var router = express.Router();
 // WILL NEED TO REMOVE OR CHANGE ONCE WE DECLARE TEAM NAME
 var team = "teamName";
 
+router.post('/land/:land',restrict, function(req, res) {
+  //console.log("req.body.optradio is : ", req.body.optradio);
+  //console.log("req.body.id is : " ,JSON.stringify(req.body)); 
+console.log("req received");
+console.log("req is " , req.body);
+ // res.send(req.body.optradio);
+  models.Questions.findAll({
+where: {
+    id: req.body.id
+}
+}).then(function(data) {
+var correctAnswer = data[0].correctAnswer;
+if (req.body.id == 1) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q1: 10
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+    } else {
+        models.Users.update({
+            Q1: 0
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+
+    }
+}
+if (req.body.id == 2) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q2: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+    } else {
+        models.Users.update({
+            Q2: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+
+    }
+}
+if (req.body.id == 3) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q3: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+            });
+    } else {
+        models.Users.update({
+            Q3: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+
+    }
+}
+if (req.body.id == 4) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q4: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+           });
+    } else {
+        models.Users.update({
+            Q4: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+
+    }
+}
+if (req.body.id == 5) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q5: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+    } else {
+        models.Users.update({
+            Q5: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+
+    }
+}
+if (req.body.id == 6) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q6: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+    } else {
+        models.Users.update({
+            Q6: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+
+    }
+}
+if (req.body.id == 7) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q7: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+    } else {
+        models.Users.update({
+            Q7: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+
+    }
+}
+if (req.body.id == 8) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q8: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+    } else {
+        models.Users.update({
+            Q8: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+
+    }
+}
+if (req.body.id == 9) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q9: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+    } else {
+        models.Users.update({
+            Q9: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+
+    }
+}
+if (req.body.id == 10) {
+    if (correctAnswer == req.body.optradio) {
+        models.Users.update({
+            Q10: 10,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+    } else {
+        models.Users.update({
+            Q10: 0,
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+            }
+        }).then(function(data) {
+            /*Refresh the page after answer is submitted*/
+            res.redirect(req.get('referer'));
+        });
+
+    }
+}
+});
+
+});
+
+
 //   ***The One Route to Route them all***
 // Route used to retrieve questions for any land
 /*restrict function ensures that only a person who has logged in can view this page(AD)*/
@@ -25,41 +324,37 @@ router.get('/land/:land', restrict, function(req, res) {
             userName: req.session.user[0].userName
         }
     }).then(function(userQuestionData){
+
           models.Questions.findAll({
               where: {
                   land: req.params.land
               }
           }).then(function(data) {
-              var JSONUserQuestions=JSON.parse(JSON.stringify(userQuestionData))[0];
-
-              var JSONData =JSON.parse(JSON.stringify(data));
-              console.log(JSON.parse(JSON.stringify(data)));
-              //console.log("data is ", data);
-              //console.log("JSONUserQuestions is : ",JSONUserQuestions);
-              //console.log("JSONData is : ", JSONData);
-              //console.log("Dho ho ho ",data[0].dataValues.id)
-              var arr =[];
+             //To find the state of the question, whether it is unanswered(null), answered right(10)
+             // or answered wrong[AD]
               for(var i = 0; i < (data.length); i++)
-              { 
-                 
-                var QNum=data[i].dataValues.id;
-                //console.log("e is ",QNum);
-                var questionNo='Q'+QNum;
-
-                var questionState= JSONUserQuestions[questionNo];
-                //Adding 'state' property to data. this will have a value of 0,10 or null . The questions
+              {          
+                var questionNo='Q'+data[i].id;
+                var questionState= userQuestionData[0][questionNo];
+                //Adding 'state' property to data. this will have a value of 0,10 or 1 . The questions
                 //need to be rendered according to the state. If data.state = null, the question is displayed.
-                //if data.state = 0, the question has been already answered incorrectly. 
-                //if data.state = 10, the question has been already answered correctly. 
-               
-                data[i].dataValues.state=questionState;
-                console.log("data[i].dataValues.state",data[i].dataValues.state);
+                //if data.state = 1, the question has been already answered incorrectly. 
+                //if data.state = 10, the question has been already answered correctly. [AD]
 
-                console.log("JSON.parse(JSON.stringify(data))",JSON.parse(JSON.stringify(data)));
-
+                /*if statements below take the questionState and update the isAnswered/isCorrect
+                boolean values since Handlebars only likes bools. -SB */
+                if(questionState == null){
+                    data[i].isAnswered = false;
+                } else if(questionState === 10){
+                    data[i].isAnswered = true;
+                    data[i].isCorrect = true;
+                } else if(questionState === 0){
+                    data[i].isAnswered = true;
+                    data[i].isCorrect = false;
+                }
               }
               res.render("questions", {
-                  //username of logged in person will be displayed on top(AD)
+                  //username of logged in person will be displayed on top[AD]
                   user: req.session.user[0].userName,
                   question: data,
                   userData: userQuestionData
@@ -231,7 +526,7 @@ query database and display appropriate standings data(AD)*/
 router.get('/standings/', restrict, function(req, res) {
     models.Users.findAll({
         where: {
-            teamName: team
+            teamName: req.session.user[0].teamName
         },
         order: "score DESC"
     }).then(function(data) {
@@ -241,7 +536,7 @@ router.get('/standings/', restrict, function(req, res) {
             //username of logged in person will be displayed on top(AD)
             user: req.session.user[0].userName,
             userName: data,
-            team
+            team: req.session.user[0].teamName
         });
     });
 });

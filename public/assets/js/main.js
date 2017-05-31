@@ -5,18 +5,8 @@ $(document).ready(function() {
         if (this.value == 'default') {
             $("#new-team").show();
         } else {
-        	$("#newTeamName").val('');
+            $("#newTeamName").val('');
             $("#new-team").hide();
         }
     });
-
-  	$('#question0').submit(function() {
-  		event.preventDefault();
- 		alert($('input[name=optradio]:checked', '#question0').val()); 
-    });
-    
-    $('#question1').submit(function() {
-      event.preventDefault();
-      alert($('input[name=optradio]:checked', '#question1').val());
-  	});
 });
