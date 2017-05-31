@@ -10,13 +10,10 @@ $(document).ready(function() {
         }
     });
 
-  	$('#question0').submit(function() {
-  		event.preventDefault();
- 		alert($('input[name=optradio]:checked', '#question0').val()); 
+	
+
     });
-    
-    $('#question1').submit(function() {
-      event.preventDefault();
-      alert($('input[name=optradio]:checked', '#question1').val());
-  	});
-});
+
+ 
+
+
