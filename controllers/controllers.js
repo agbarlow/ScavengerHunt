@@ -500,19 +500,6 @@ router.get('/username/:username', function(req, res) {
     });
 });
 
-//Is this still needed? 
-//To create an entry for a new user and log to console
-router.get('/username/:username', function(req, res) {
-  models.Users.create({
-      userName: 'testUsername',
-      teamName: 'teamName'
-  }).then(function(data) {
-      console.log(data);
-  });
-});
-
-
-
 /*Get route for registration page*/
 router.get('/registration', function(req, res) {
     models.Users.aggregate('teamName', 'DISTINCT', { plain: false }).then(function(data) {
