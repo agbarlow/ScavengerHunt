@@ -5,6 +5,8 @@
 var models = require("../models");
 var express = require('express');
 var router = express.Router();
+var Sequelize = require('sequelize');
+
 // ===============================================================================
 // URL ROUTING
 // ===============================================================================
@@ -28,8 +30,8 @@ var correctAnswer = data[0].correctAnswer;
 if (req.body.id == 1) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
-            Q1: 10
-
+            Q1: 10,
+            score: Sequelize.literal('score + 10')
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -58,7 +60,7 @@ if (req.body.id == 2) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q2: 10,
-
+            score: Sequelize.literal('score + 10')
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -86,7 +88,7 @@ if (req.body.id == 3) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q3: 10,
-
+            score: Sequelize.literal('score + 10')
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -114,7 +116,7 @@ if (req.body.id == 4) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q4: 10,
-
+            score: Sequelize.literal('score + 10')
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -142,7 +144,7 @@ if (req.body.id == 5) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q5: 10,
-
+            score: Sequelize.literal('score + 10')
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -171,7 +173,7 @@ if (req.body.id == 6) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q6: 10,
-
+            score: Sequelize.literal('score + 10')
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -199,7 +201,7 @@ if (req.body.id == 7) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q7: 10,
-
+            score: Sequelize.literal('score + 10')
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -227,7 +229,7 @@ if (req.body.id == 8) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q8: 10,
-
+            score: Sequelize.literal('score + 10')
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -255,7 +257,7 @@ if (req.body.id == 9) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q9: 10,
-
+            score: Sequelize.literal('score + 10')
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -283,7 +285,7 @@ if (req.body.id == 10) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q10: 10,
-
+            score: Sequelize.literal('score + 10')
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -487,7 +489,7 @@ router.post('/', function(req, res) {
 
 // To check if a usename is unique 
 router.get('/username/:username', function(req, res) {
-    models.Users2s.findOne({
+    models.Users.findOne({
         where: {
             userName: req.params.username
         }
@@ -501,7 +503,7 @@ router.get('/username/:username', function(req, res) {
 //Is this still needed? 
 //To create an entry for a new user and log to console
 router.get('/username/:username', function(req, res) {
-  models.Users2s.create({
+  models.Users.create({
       userName: 'testUsername',
       teamName: 'teamName'
   }).then(function(data) {
@@ -513,7 +515,7 @@ router.get('/username/:username', function(req, res) {
 
 /*Get route for registration page*/
 router.get('/registration', function(req, res) {
-    models.Users.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
+    models.Users.aggregate('teamName', 'DISTINCT', { plain: false }).then(function(data) {
         res.render("registration", { team: data });
         //  console.log(data);
     });
