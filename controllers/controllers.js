@@ -25,6 +25,31 @@ where: {
 }
 }).then(function(data) {
 var correctAnswer = data[0].correctAnswer;
+if(correctAnswer == req.body.optradio)
+{
+     models.Users.findAll({
+where: {
+    userName: req.session.user[0].userName
+}
+}).then(function(data4) {
+    console.log(data4[0].score);
+    var newscore;
+    if(data4[0].score==null)
+    newscore=10
+    else newscore=data4[0].score+10;
+    
+    models.Users.update({
+            score: newscore
+
+        }, {
+            where: {
+                userName: req.session.user[0].userName
+
+            }
+        })
+
+ });
+ }
 if (req.body.id == 1) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
