@@ -60,11 +60,12 @@ app.use(function(req, res, next){
 // The below points our server to a series of "route" files.
 var routes=require("./controllers/controllers.js");
 app.use('/', routes);
-// catch 404 and forward to error handler
 
 
 var db=require("./models")
 
+
+require("./controllers/api-routes.js")(app);
 
 
 // The below code effectively "starts" our server

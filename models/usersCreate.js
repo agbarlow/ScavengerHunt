@@ -16,6 +16,7 @@ module.exports = function(sequelize, DataTypes) {
     "password"        : DataTypes.STRING,
     "email"           : DataTypes.STRING,
     "name"            : DataTypes.STRING
+
   }
   );
   return User;
