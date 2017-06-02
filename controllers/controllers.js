@@ -5,8 +5,6 @@
 var models = require("../models");
 var express = require('express');
 var router = express.Router();
-var Sequelize = require('sequelize');
-
 // ===============================================================================
 // URL ROUTING
 // ===============================================================================
@@ -30,8 +28,8 @@ var correctAnswer = data[0].correctAnswer;
 if (req.body.id == 1) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
-            Q1: 10,
-            score: Sequelize.literal('score + 10')
+            Q1: 10
+
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -60,7 +58,7 @@ if (req.body.id == 2) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q2: 10,
-            score: Sequelize.literal('score + 10')
+
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -88,7 +86,7 @@ if (req.body.id == 3) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q3: 10,
-            score: Sequelize.literal('score + 10')
+
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -116,7 +114,7 @@ if (req.body.id == 4) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q4: 10,
-            score: Sequelize.literal('score + 10')
+
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -144,7 +142,7 @@ if (req.body.id == 5) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q5: 10,
-            score: Sequelize.literal('score + 10')
+
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -173,7 +171,7 @@ if (req.body.id == 6) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q6: 10,
-            score: Sequelize.literal('score + 10')
+
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -201,7 +199,7 @@ if (req.body.id == 7) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q7: 10,
-            score: Sequelize.literal('score + 10')
+
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -229,7 +227,7 @@ if (req.body.id == 8) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q8: 10,
-            score: Sequelize.literal('score + 10')
+
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -257,7 +255,7 @@ if (req.body.id == 9) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q9: 10,
-            score: Sequelize.literal('score + 10')
+
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -285,7 +283,7 @@ if (req.body.id == 10) {
     if (correctAnswer == req.body.optradio) {
         models.Users.update({
             Q10: 10,
-            score: Sequelize.literal('score + 10')
+
         }, {
             where: {
                 userName: req.session.user[0].userName
@@ -382,7 +380,6 @@ router.post('/registration', function(req, res, next) {
     req.check('name', 'Name is a required field.').isLength({ min: 1 });
     req.check('team', 'You must join an existing team, or create a new one.').isLength({ min: 1 });
     var errors = req.validationErrors();
-
 
     /*If none of the errors above are triggered, errors gets set to 'false'
     instead of an array.  Since the validation below pushes errors to an
@@ -481,6 +478,7 @@ router.post('/', function(req, res) {
             } else {
                 errors.push({ param: 'password', msg: 'Password Is Incorrect', value: '' });
                 res.render("index", { error: errors });
+
             }
         }
 
@@ -500,13 +498,16 @@ router.get('/username/:username', function(req, res) {
     });
 });
 
+
 /*Get route for registration page*/
 router.get('/registration', function(req, res) {
-    models.Users.aggregate('teamName', 'DISTINCT', { plain: false }).then(function(data) {
+    models.Users.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
         res.render("registration", { team: data });
         //  console.log(data);
     });
 });
+
+
 
 /*Get route for standings page*/
 /*restrict function ensures that only a person who has logged in can view this page(AD)*/
@@ -531,8 +532,8 @@ router.get('/standings/', restrict, function(req, res) {
 });
 // To check if a usename is unique
 
-
 //To create an entry for a new user
+
 router.get('/', function(req, res) {
     models.Questions.findAll().then(function(data) {
         //console.log(data);
