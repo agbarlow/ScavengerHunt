@@ -166,6 +166,20 @@ span.input-group-addon i {
 #begin{
     margin:10px 0px 10px 0px;
 }
+
+
+#score{
+    color: red;
+}
+
+ ol
+    {
+       display: inline-block;
+       margin-left: auto;
+       margin-right: auto;
+    }
+;
+
 .btn,
   .btn:active,
   .btn:active:focus,
@@ -224,3 +238,4 @@ a:visited {
 a:hover {
     color: hotpink;
 }
+
