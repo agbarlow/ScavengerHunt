@@ -1,6 +1,6 @@
 <div>Username: <b>{{user}}</b></div>
 <div>Team Name: <b>{{team}}</b></div>
-<div>Current Score:  <b>{{score}} Points</b></div>
+<div>Current Score:  <b><span id='score'>{{score}}</span> Points</b></div>
 <!-- Simple Layout for pushing Data to Standings Page- AGB  -->
 <b><a href="/land/MainSt">Main Street USA</a> - 
 <a href="/land/Adventureland">Adventureland</a> - 
@@ -13,4 +13,7 @@
   <li>{{{this.userName}}} - {{{this.score}}} </li>
 {{/each}}
 </ol>
-<b><a href="/standings">View Standings</a> - <a href="/logout">Logout</a></b>
+<br>
+<form action="/logout">
+    <input type="submit" class="btn btn-lg btn-success" value="Logout" />
+</form>
