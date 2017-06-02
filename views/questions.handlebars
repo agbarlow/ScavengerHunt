@@ -1,10 +1,11 @@
-<div>Welcome {{user}}! </div>
-<div><a href="/logout">logout</a></div>
-<a href="/land/MainSt">Main Street USA</a> - 
+<div>Username: <b>{{user}}</b></div>
+<div>Team Name: <b>{{team}}</b></div>
+<div>Current Score:  <b><span id='score'>{{score}}</span> Points</b></div>
+<b><a href="/land/MainSt">Main Street USA</a> - 
 <a href="/land/Adventureland">Adventureland</a> - 
 <a href="/land/Frontierland">Frontierland</a> - 
 <a href="/land/Fantasyland">Fantasyland</a> - 
-<a href="/land/Tomorrowland">Tomorrowland</a><br><br>
+<a href="/land/Tomorrowland">Tomorrowland</a><br></b>
 
 
 <!-- Create a list for each question in this specific 'land'
@@ -51,11 +52,11 @@ id='question3answer4' -SB
 		<br>
 	{{/if}}
 {{else}}
-<div id="begin">Welcome to our Scavenger Hunt!<br>Select a Land to Begin.</div>
+<h2 id="begin">Welcome to our Scavenger Hunt!<br>Select a Land to Begin.</h2>
 {{/each}}
 </ul>
 
 
 <p>{{result}}</p>
 
-<a href="/standings">View Standings</a> 
+<b><a href="/standings">View Standings</a> - <a href="/logout">Logout</a></b>
