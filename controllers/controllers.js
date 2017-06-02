@@ -506,6 +506,11 @@ router.get('/registration', function(req, res) {
     });
 });
 
+/*Get Route for instructions page */
+router.get('/instructions', function(req, res) {
+	res.render("instructions");
+	});
+
 
 
 /*Get route for standings page*/
