@@ -174,4 +174,11 @@ span.input-group-addon i {
 #score{
     color: red;
 }
+
+ ol
+    {
+       display: inline-block;
+       margin-left: auto;
+       margin-right: auto;
+    }
 ;
