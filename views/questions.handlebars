@@ -30,8 +30,8 @@ id='question3answer4' -SB
 			{{/if}}
 	{{else}}
 	<div id="questions">
-		<div id="question-title">Question {{id}}</div>
-		<p>{{question}}</p>
+		<b><div id="question-title">Question {{id}}</div>
+		<span>{{question}}</span></b>
     <form id="question{{@index}}" METHOD="post" action="">
     <input type="hidden" name="id" value="{{id}}" />
 		<div class="radio" id="question{{this.id}}answer1">
@@ -52,7 +52,7 @@ id='question3answer4' -SB
 		<br>
 	{{/if}}
 {{else}}
-<h2 id="begin">Welcome to our Scavenger Hunt!<br>Select a Land to Begin.</h2>
+<b><h2 id="begin">Welcome to our Scavenger Hunt!<br>Select a Land to Begin.</h2></b>
 {{/each}}
 </ul>
 
