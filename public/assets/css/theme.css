@@ -2,6 +2,7 @@ body {
     /*bottom margin set for sticky footer*/
     margin-bottom: 90px;
     width: 100%;
+    font-size: 17px;
     text-align: center;
     color:#9055A2;
     background-color: #E8C1C5
@@ -39,7 +40,7 @@ html {
     font-size: 1.1em;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 60px;
+    height: 90px;
     background-color: #D499B9;
     color: #2E294E;
     display: flex;
@@ -50,11 +51,6 @@ html {
 
 /*end sticky footer code*/
 
-#playground-container {
-    height: 500px;
-    overflow: hidden !important;
-    -webkit-overflow-scrolling: touch;
-}
 body, html{
     font-family: 'Oxygen', sans-serif;
         background-size: cover;
@@ -85,7 +81,7 @@ label{
 
 input,
 input::-webkit-input-placeholder {
-    font-size: 11px;
+    font-size: 15px;
     padding-top: 3px;
 }
 
@@ -129,7 +125,7 @@ padding: 8px 12px !important;
     margin: 0 auto;
     max-width: 400px;
     padding: 10px 40px;
-    background:#009edf;
+    background:#9055A2;
         color: #FFF;
     text-shadow: none;
     -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
@@ -138,7 +134,7 @@ box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
 
 }
 span.input-group-addon i {
-    color: #009edf;
+    color: #9055A2;
     font-size: 17px;
 }
 
@@ -151,7 +147,7 @@ span.input-group-addon i {
     text-align: center;
 }
 
-.error-list{
+.error-list, #score{
     color:red;
 }
 
@@ -171,6 +167,7 @@ span.input-group-addon i {
     margin:10px 0px 10px 0px;
 }
 
+
 #score{
     color: red;
 }
@@ -182,3 +179,63 @@ span.input-group-addon i {
        margin-right: auto;
     }
 ;
+
+.btn,
+  .btn:active,
+  .btn:active:focus,
+  .btn.btn-primary[disabled],
+  .btn.btn-success[disabled]{
+      font-size: 20px;
+      color: #fff;
+      background-color: #340865;
+      border: none;
+  }
+  
+  .btn:hover,
+  .btn:focus {
+      background-color: #220542;
+      border-color: white;
+      color: #A2A7A5;
+  }
+  
+  .btn:focus {
+      color: #fff;
+  }
+  
+  .btn:focus,
+  .btn:active:focus,
+  .btn.active:focus {
+      outline: 0 none;
+  }
+
+  #correctAnswers,
+  #incorrectAnswers{
+    color:#340865;
+  }
+    ::-moz-selection {
+      background: #340865;
+      color: #fff;
+      text-shadow: none;
+  }
+  
+  ::selection {
+      background: #340865;
+      color: #fff;
+      text-shadow: none;
+  }
+
+  /* unvisited link */
+a:link {
+    color: #340865;
+}
+
+/* visited link */
+a:visited {
+    color: #340865;
+}
+
+/* mouse over link */
+a:hover {
+    color: hotpink;
+}
+

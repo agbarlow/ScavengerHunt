@@ -1,6 +1,6 @@
-<div>Username: <b>{{user}}</b></div>
-<div>Team Name: <b>{{team}}</b></div>
-<div>Current Score:  <b><span id='score'>{{score}}</span> Points</b></div>
+<div><b>Username:</b> {{user}}</div>
+<div><b>Team Name:</b> {{team}}</div>
+<div><b>Current Score:</b>  <span id='score'>{{score}}</span> Points</div>
 <b><a href="/land/MainSt">Main Street USA</a> - 
 <a href="/land/Adventureland">Adventureland</a> - 
 <a href="/land/Frontierland">Frontierland</a> - 
@@ -30,7 +30,7 @@ id='question3answer4' -SB
 			{{/if}}
 	{{else}}
 	<div id="questions">
-		<div id="question-title">Question Number {{id}}</div>
+		<div id="question-title">Question {{id}}</div>
 		<p>{{question}}</p>
     <form id="question{{@index}}" METHOD="post" action="">
     <input type="hidden" name="id" value="{{id}}" />
@@ -59,4 +59,8 @@ id='question3answer4' -SB
 
 <p>{{result}}</p>
 
-<b><a href="/standings">View Standings</a> - <a href="/logout">Logout</a></b>
+<b><a href="/standings">View Standings</a>
+<br>
+<form action="/logout">
+    <input type="submit" class="btn btn-lg btn-success" value="Logout" />
+</form>
