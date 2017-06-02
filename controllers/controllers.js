@@ -5,334 +5,324 @@
 var models = require("../models");
 var express = require('express');
 var router = express.Router();
+
 // ===============================================================================
 // URL ROUTING
 // ===============================================================================
 
+router.post('/land/:land', restrict, function(req, res) {
+    models.Questions.findAll({
+        where: {
+            id: req.body.id
+        }
+    }).then(function(data) {
+        var correctAnswer = data[0].correctAnswer;
+        if (correctAnswer == req.body.optradio) {
+            models.Users.findAll({
+                where: {
+                    userName: req.session.user[0].userName
+                }
+            }).then(function(data4) {
+                var newscore;
+                if (data4[0].score == null)
+                    newscore = 10
+                else newscore = data4[0].score + 10;
 
-// WILL NEED TO REMOVE OR CHANGE ONCE WE DECLARE TEAM NAME
-var team = "teamName";
+                models.Users.update({
+                    score: newscore
 
-router.post('/land/:land',restrict, function(req, res) {
-  //console.log("req.body.optradio is : ", req.body.optradio);
-  //console.log("req.body.id is : " ,JSON.stringify(req.body)); 
-console.log("req received");
-console.log("req is " , req.body);
- // res.send(req.body.optradio);
-  models.Questions.findAll({
-where: {
-    id: req.body.id
-}
-}).then(function(data) {
-var correctAnswer = data[0].correctAnswer;
-if(correctAnswer == req.body.optradio)
-{
-     models.Users.findAll({
-where: {
-    userName: req.session.user[0].userName
-}
-}).then(function(data4) {
-    console.log(data4[0].score);
-    var newscore;
-    if(data4[0].score==null)
-    newscore=10
-    else newscore=data4[0].score+10;
-    
-    models.Users.update({
-            score: newscore
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
 
-        }, {
-            where: {
-                userName: req.session.user[0].userName
+                    }
+                })
 
-            }
-        })
-
- });
- }
-if (req.body.id == 1) {
-    if (correctAnswer == req.body.optradio) {
-        models.Users.update({
-            Q1: 10
-
-        }, {
-            where: {
-                userName: req.session.user[0].userName
-
-            }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-    } else {
-        models.Users.update({
-            Q1: 0
-
-        }, {
-            where: {
-                userName: req.session.user[0].userName
-            }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-
-    }
-}
-if (req.body.id == 2) {
-    if (correctAnswer == req.body.optradio) {
-        models.Users.update({
-            Q2: 10,
-
-        }, {
-            where: {
-                userName: req.session.user[0].userName
-            }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-    } else {
-        models.Users.update({
-            Q2: 0,
-
-        }, {
-            where: {
-                userName: req.session.user[0].userName
-            }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-
-    }
-}
-if (req.body.id == 3) {
-    if (correctAnswer == req.body.optradio) {
-        models.Users.update({
-            Q3: 10,
-
-        }, {
-            where: {
-                userName: req.session.user[0].userName
-            }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
             });
-    } else {
-        models.Users.update({
-            Q3: 0,
+        }
+        if (req.body.id == 1) {
+            if (correctAnswer == req.body.optradio) {
+                models.Users.update({
+                    Q1: 10
 
-        }, {
-            where: {
-                userName: req.session.user[0].userName
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+            } else {
+                models.Users.update({
+                    Q1: 0
+
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+
             }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
+        }
+        if (req.body.id == 2) {
+            if (correctAnswer == req.body.optradio) {
+                models.Users.update({
+                    Q2: 10,
 
-    }
-}
-if (req.body.id == 4) {
-    if (correctAnswer == req.body.optradio) {
-        models.Users.update({
-            Q4: 10,
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+            } else {
+                models.Users.update({
+                    Q2: 0,
 
-        }, {
-            where: {
-                userName: req.session.user[0].userName
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+
             }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-           });
-    } else {
-        models.Users.update({
-            Q4: 0,
+        }
+        if (req.body.id == 3) {
+            if (correctAnswer == req.body.optradio) {
+                models.Users.update({
+                    Q3: 10,
 
-        }, {
-            where: {
-                userName: req.session.user[0].userName
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+            } else {
+                models.Users.update({
+                    Q3: 0,
+
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+
             }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
+        }
+        if (req.body.id == 4) {
+            if (correctAnswer == req.body.optradio) {
+                models.Users.update({
+                    Q4: 10,
 
-    }
-}
-if (req.body.id == 5) {
-    if (correctAnswer == req.body.optradio) {
-        models.Users.update({
-            Q5: 10,
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+            } else {
+                models.Users.update({
+                    Q4: 0,
 
-        }, {
-            where: {
-                userName: req.session.user[0].userName
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+
             }
-        }).then(function(data) {
-            
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-    } else {
-        models.Users.update({
-            Q5: 0,
+        }
+        if (req.body.id == 5) {
+            if (correctAnswer == req.body.optradio) {
+                models.Users.update({
+                    Q5: 10,
 
-        }, {
-            where: {
-                userName: req.session.user[0].userName
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+            } else {
+                models.Users.update({
+                    Q5: 0,
+
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+
             }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
+        }
+        if (req.body.id == 6) {
+            if (correctAnswer == req.body.optradio) {
+                models.Users.update({
+                    Q6: 10,
 
-    }
-}
-if (req.body.id == 6) {
-    if (correctAnswer == req.body.optradio) {
-        models.Users.update({
-            Q6: 10,
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+            } else {
+                models.Users.update({
+                    Q6: 0,
 
-        }, {
-            where: {
-                userName: req.session.user[0].userName
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+
             }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-    } else {
-        models.Users.update({
-            Q6: 0,
+        }
+        if (req.body.id == 7) {
+            if (correctAnswer == req.body.optradio) {
+                models.Users.update({
+                    Q7: 10,
 
-        }, {
-            where: {
-                userName: req.session.user[0].userName
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+            } else {
+                models.Users.update({
+                    Q7: 0,
+
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+
             }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
+        }
+        if (req.body.id == 8) {
+            if (correctAnswer == req.body.optradio) {
+                models.Users.update({
+                    Q8: 10,
 
-    }
-}
-if (req.body.id == 7) {
-    if (correctAnswer == req.body.optradio) {
-        models.Users.update({
-            Q7: 10,
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+            } else {
+                models.Users.update({
+                    Q8: 0,
 
-        }, {
-            where: {
-                userName: req.session.user[0].userName
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+
             }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-    } else {
-        models.Users.update({
-            Q7: 0,
+        }
+        if (req.body.id == 9) {
+            if (correctAnswer == req.body.optradio) {
+                models.Users.update({
+                    Q9: 10,
 
-        }, {
-            where: {
-                userName: req.session.user[0].userName
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+            } else {
+                models.Users.update({
+                    Q9: 0,
+
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+
             }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
+        }
+        if (req.body.id == 10) {
+            if (correctAnswer == req.body.optradio) {
+                models.Users.update({
+                    Q10: 10,
 
-    }
-}
-if (req.body.id == 8) {
-    if (correctAnswer == req.body.optradio) {
-        models.Users.update({
-            Q8: 10,
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+            } else {
+                models.Users.update({
+                    Q10: 0,
 
-        }, {
-            where: {
-                userName: req.session.user[0].userName
+                }, {
+                    where: {
+                        userName: req.session.user[0].userName
+                    }
+                }).then(function(data) {
+                    /*Refresh the page after answer is submitted*/
+                    res.redirect(req.get('referer'));
+                });
+
             }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-    } else {
-        models.Users.update({
-            Q8: 0,
-
-        }, {
-            where: {
-                userName: req.session.user[0].userName
-            }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-
-    }
-}
-if (req.body.id == 9) {
-    if (correctAnswer == req.body.optradio) {
-        models.Users.update({
-            Q9: 10,
-
-        }, {
-            where: {
-                userName: req.session.user[0].userName
-            }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-    } else {
-        models.Users.update({
-            Q9: 0,
-
-        }, {
-            where: {
-                userName: req.session.user[0].userName
-            }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-
-    }
-}
-if (req.body.id == 10) {
-    if (correctAnswer == req.body.optradio) {
-        models.Users.update({
-            Q10: 10,
-
-        }, {
-            where: {
-                userName: req.session.user[0].userName
-            }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-    } else {
-        models.Users.update({
-            Q10: 0,
-
-        }, {
-            where: {
-                userName: req.session.user[0].userName
-            }
-        }).then(function(data) {
-            /*Refresh the page after answer is submitted*/
-            res.redirect(req.get('referer'));
-        });
-
-    }
-}
-});
+        }
+    });
 
 });
 
@@ -344,23 +334,21 @@ if (req.body.id == 10) {
 query database and display appropriate questions(AD)*/
 router.get('/land/:land', restrict, function(req, res) {
 
-  models.Users.findAll({ 
+    models.Users.findAll({
         where: {
             userName: req.session.user[0].userName
         }
-    }).then(function(userQuestionData){
-
-          models.Questions.findAll({
-              where: {
-                  land: req.params.land
-              }
-          }).then(function(data) {
-             //To find the state of the question, whether it is unanswered(null), answered right(10)
-             // or answered wrong[AD]
-              for(var i = 0; i < (data.length); i++)
-              {          
-                var questionNo='Q'+data[i].id;
-                var questionState= userQuestionData[0][questionNo];
+    }).then(function(userQuestionData) {
+        models.Questions.findAll({
+            where: {
+                land: req.params.land
+            }
+        }).then(function(data) {
+            //To find the state of the question, whether it is unanswered(null), answered right(10)
+            // or answered wrong[AD]
+            for (var i = 0; i < (data.length); i++) {
+                var questionNo = 'Q' + data[i].id;
+                var questionState = userQuestionData[0][questionNo];
                 //Adding 'state' property to data. this will have a value of 0,10 or 1 . The questions
                 //need to be rendered according to the state. If data.state = null, the question is displayed.
                 //if data.state = 1, the question has been already answered incorrectly. 
@@ -368,25 +356,27 @@ router.get('/land/:land', restrict, function(req, res) {
 
                 /*if statements below take the questionState and update the isAnswered/isCorrect
                 boolean values since Handlebars only likes bools. -SB */
-                if(questionState == null){
+                if (questionState == null) {
                     data[i].isAnswered = false;
-                } else if(questionState === 10){
+                } else if (questionState === 10) {
                     data[i].isAnswered = true;
                     data[i].isCorrect = true;
-                } else if(questionState === 0){
+                } else if (questionState === 0) {
                     data[i].isAnswered = true;
                     data[i].isCorrect = false;
                 }
-              }
-              res.render("questions", {
-                  //username of logged in person will be displayed on top[AD]
-                  user: req.session.user[0].userName,
-                  question: data,
-                  userData: userQuestionData
-              });
-          });
-      });
- });
+            }
+            res.render("questions", {
+                //username of logged in person will be displayed on top[AD]
+                user: req.session.user[0].userName,
+                question: data,
+                userData: userQuestionData,
+                team: req.session.user[0].teamName,
+                score: req.session.user[0].score
+            });
+        });
+    });
+});
 
 //post route to collect/validate/save registration info 
 router.post('/registration', function(req, res, next) {
@@ -480,7 +470,6 @@ router.post('/', function(req, res) {
             userName: req.body.username
         }
     }).then(function(data2) {
-       // console.log(JSON.stringify(data2));
         //find if username exists
         var errors = [];
         if (data2.length < 1) {
@@ -496,9 +485,8 @@ router.post('/', function(req, res) {
                     // or in this case the entire user object
                     var user = JSON.parse(JSON.stringify(data2));
                     req.session.user = user;
-                    console.log("user is", user[0].userName);
                     req.session.success = 'Authenticated as ' + user[0].userName + ' click to <a href="/logout">logout</a>. ' + ' You may now access <a href="/restricted">/restricted</a>.';
-                    res.render('questions', { user: req.session.user[0].userName });
+                    res.render('questions', { user: req.session.user[0].userName, team: req.session.user[0].teamName, score: req.session.user[0].score });
                 });
             } else {
                 errors.push({ param: 'password', msg: 'Password Is Incorrect', value: '' });
@@ -510,25 +498,11 @@ router.post('/', function(req, res) {
     });
 });
 
-// To check if a usename is unique 
-router.get('/username/:username', function(req, res) {
-    models.Users.findOne({
-        where: {
-            userName: req.params.username
-        }
-    }).then(function(data) {
-
-        // console.log(data);
-
-    });
-});
-
 
 /*Get route for registration page*/
 router.get('/registration', function(req, res) {
     models.Users.aggregate('teamname', 'DISTINCT', { plain: false }).then(function(data) {
         res.render("registration", { team: data });
-        //  console.log(data);
     });
 });
 
@@ -545,13 +519,13 @@ router.get('/standings/', restrict, function(req, res) {
         },
         order: "score DESC"
     }).then(function(data) {
-        //console.log(data);
         // NEEDS TO BE UPDATED WITH TEAM NAME ONCE WE DECLARE IT
         res.render("standings", {
             //username of logged in person will be displayed on top(AD)
             user: req.session.user[0].userName,
             userName: data,
-            team: req.session.user[0].teamName
+            team: req.session.user[0].teamName,
+            score: req.session.user[0].score
         });
     });
 });
@@ -561,7 +535,6 @@ router.get('/standings/', restrict, function(req, res) {
 
 router.get('/', function(req, res) {
     models.Questions.findAll().then(function(data) {
-        //console.log(data);
         res.render("index");
     });
 });

@@ -3,12 +3,21 @@ body {
     margin-bottom: 90px;
     width: 100%;
     text-align: center;
+    color:#9055A2;
+    background-color: #E8C1C5
 }
 
+.jumbotron{
+    background-color: #D499B9;
+    margin:0;
+    color: #2E294E;
+    border-bottom: 10px solid #9055A2;
+}
 .container {
     width: 100%;
     text-align: center;
     padding-bottom: 25px;
+    background-color: #E8C1C5;
 }
 
 ul {
@@ -30,13 +39,13 @@ html {
     font-size: 1.1em;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 90px;
-    color: #A2A7A5;
-    background-color: #340865;
+    height: 60px;
+    background-color: #D499B9;
+    color: #2E294E;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 15px solid #635380;
+    border-top: 15px solid #9055A2;
 }
 
 /*end sticky footer code*/
@@ -149,12 +158,20 @@ span.input-group-addon i {
 #correct{
     color:green;
     font-weight: bolder;
-    padding: 20px;
+    padding: 10px;
 }
 
 #incorrect{
     color:red;
     font-weight: bolder;
-    padding: 20px;
+    padding: 10px;
+}
+
+#begin{
+    margin:10px 0px 10px 0px;
+}
+
+#score{
+    color: red;
 }
 ;
