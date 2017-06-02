@@ -27,7 +27,7 @@ router.post('/land/:land', restrict, function(req, res) {
                 if (data4[0].score == null)
                     newscore = 10
                 else newscore = data4[0].score + 10;
-
+                req.session.user[0].score = newscore;
                 models.Users.update({
                     score: newscore
 
