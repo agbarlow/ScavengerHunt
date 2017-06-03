@@ -4,21 +4,21 @@ body {
     width: 100%;
     font-size: 17px;
     text-align: center;
-    color:#9055A2;
+    color:#33334d;
     background-color: #E8C1C5
 }
 
 .jumbotron{
-    background-color: #D499B9;
+    background-color: #000080;
     margin:0;
-    color: #2E294E;
-    border-bottom: 10px solid #9055A2;
+    color: white;
+    border-bottom: 10px solid #8585ad;
 }
 .container {
     width: 100%;
     text-align: center;
     padding: 10px 0 25px 0;
-    background-color: #E8C1C5;
+    background-color: #ccccff;
 }
 
 ul {
@@ -41,12 +41,12 @@ html {
     width: 100%;
     /* Set the fixed height of the footer here */
     height: 90px;
-    background-color: #D499B9;
-    color: #2E294E;
+    background-color: #000080;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 15px solid #9055A2;
+    border-top: 15px solid #8585ad;
 }
 
 /*end sticky footer code*/
@@ -181,13 +181,13 @@ span.input-group-addon i {
   .btn.btn-success[disabled]{
       font-size: 20px;
       color: #fff;
-      background-color: #340865;
+      background-color: green;
       border: none;
   }
   
   .btn:hover,
   .btn:focus {
-      background-color: #220542;
+      background-color: #000080;
       border-color: white;
       color: #A2A7A5;
   }
@@ -241,3 +241,11 @@ p.instructions {
        
        
   }     
+  h2 {
+  color: #33334d;
+  }
+
+.btn-lg {
+      background-color: red;
+  }
+  
