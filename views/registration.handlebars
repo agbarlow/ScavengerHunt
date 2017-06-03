@@ -52,12 +52,12 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="existing-team" class="cols-sm-2 control-label">Join an Existing Team <b>- OR -</b> Create a New Team</label>
+					<label for="existing-team" class="cols-sm-2 control-label">Join an Existing League <b>- OR -</b> Create a New League</label>
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
 							  <select class="form-control" name="team"  id="sel1">
-							  <option value="default">--Existing Teams--</option>
+							  <option value="default">--Existing Leagues--</option>
 							  {{#each team}}
                               <option value="{{this.DISTINCT}}" >{{this.DISTINCT}}</option>
                               {{/each}}
@@ -66,11 +66,11 @@
 					</div>
 				</div>
 				<div class="form-group" id="new-team">
-					<label for="new-team" class="cols-sm-2 control-label">Create a New Team</label>
+					<label for="new-team" class="cols-sm-2 control-label">Create a New League</label>
 					<div class="cols-sm-10">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-							<input type="text" class="form-control" name="newteam" id="newTeamName"  placeholder="Enter New Team Name" value="{{inputData.team}}"/>
+							<input type="text" class="form-control" name="newteam" id="newTeamName"  placeholder="Enter New League Name" value="{{inputData.team}}"/>
 						</div>
 					</div>
 				</div>

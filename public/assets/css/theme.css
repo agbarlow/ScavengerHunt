@@ -233,3 +233,11 @@ a:hover {
     color: hotpink;
 }
 
+p.instructions {
+ display: inline-block;
+       margin-left: auto;
+       margin-right: auto;
+       text-align: left;
+       
+       
+  }     
